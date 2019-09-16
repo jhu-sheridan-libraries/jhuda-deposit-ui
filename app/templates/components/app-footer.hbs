@@ -1,0 +1,16 @@
+<footer id="app-footer" class="justify-content-center mt-3 pt-3">
+  <div class="row">
+    <div class="col">
+      <small>
+        {{yield}}
+        Interested in making this app better?
+        <LinkTo @route="contact">Contact us!</LinkTo>
+      </small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <small>rev. {{app-version hideVersion=true}}</small>
+    </div>
+  </div>
+</footer>

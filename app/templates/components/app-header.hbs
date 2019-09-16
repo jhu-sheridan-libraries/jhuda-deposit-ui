@@ -1,0 +1,25 @@
+<header id="app-header">
+  <nav class="navbar navbar-expand-lg justify-content-center sticky-top">
+    <LinkTo @route="dashboard" class="navbar-brand">
+      Sheridan Libraries Data Archive Deposit
+    </LinkTo>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
+        aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon fas fa-bars"></span>
+    </button>
+    <div id="navbar-content" class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <LinkTo @route="dashboard" class="nav-link">Dashboard</LinkTo>
+        </li>
+        <li class="nav-item">
+          <LinkTo @route="about" class="nav-link">About</LinkTo>
+        </li>
+        <li class="nav-item">
+          <LinkTo @route="contact" class="nav-link">Contact</LinkTo>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  {{yield}}
+</header>
