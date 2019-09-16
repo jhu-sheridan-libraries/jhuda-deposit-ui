@@ -12,7 +12,7 @@ module('Integration | Component | app-footer', function(hooks) {
 
     await render(hbs`<AppFooter />`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.ok(this.element.textContent.includes('Contact us'));
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | app-footer', function(hooks) {
       </AppFooter>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(this.element.textContent.trim().includes('template block text'));
   });
 });

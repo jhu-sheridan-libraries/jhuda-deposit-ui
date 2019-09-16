@@ -12,7 +12,7 @@ module('Integration | Component | app-header', function(hooks) {
 
     await render(hbs`<AppHeader />`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.ok(this.element.textContent.includes('Dashboard'));
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | app-header', function(hooks) {
       </AppHeader>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(this.element.textContent.trim().includes('template block text'));
   });
 });
