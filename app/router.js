@@ -8,6 +8,11 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('dashboard', { path: '/' });
+
+  this.route('submission', function() {
+    this.route('details', { path: '/:submission_id' });
+    this.route('new');
+  });
 });
 
 export default Router;
