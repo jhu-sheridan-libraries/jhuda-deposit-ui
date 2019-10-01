@@ -10,8 +10,8 @@ Router.map(function() {
   this.route('dashboard', { path: '/' });
 
   this.route('submission', function() {
+    this.route('workflow', { path: '/new' });
     this.route('details', { path: '/:submission_id' });
-    this.route('new');
   });
 });
 
