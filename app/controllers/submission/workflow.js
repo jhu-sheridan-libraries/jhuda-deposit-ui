@@ -24,8 +24,7 @@ export default Controller.extend({
       const order = this.get('routeOrder')();
       const index = order.indexOf(this.get('currentRoute'));
 
-      if (index === 0 || index > order.length) {
-        this.transitionToRoute(this.newRoute(order[0]));
+      if (index <= 0) {
         return;
       }
 
@@ -45,6 +44,10 @@ export default Controller.extend({
       }
 
       this.transitionToRoute(this.newRoute(order[index+1]));
+    },
+
+    cancel() {
+      this.transitionToRoute('dashboard');
     }
   }
 
