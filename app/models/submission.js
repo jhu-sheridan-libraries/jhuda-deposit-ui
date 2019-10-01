@@ -3,8 +3,11 @@ import { computed } from '@ember/object';
 const { Model } = DS;
 
 export default Model.extend({
-  user: DS.belongsTo('user'),
+  user: DS.belongsTo('user', { async: true }),
   accessUrl: DS.attr('string'), // URL in the archive, will only appear when the submission is COMPLETE
+
+  /** List of File objects associated with this submission */
+  files: DS.hasMany('file', { async: true }),
 
   /** enum: draft, uploadingFiles, scanning, changesRequired, complete */
   status: DS.attr('string'),  // Submission summary status
