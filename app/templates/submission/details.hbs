@@ -1,4 +1,31 @@
-<h2>Submission Details stub</h2>
-<p>
+<div class="row">
+  <h2>Submission Details stub</h2>
+</div>
+<p class="row">
   This route is meant to display detailed information about a submission to the archive.
 </p>
+<hr>
+<div class="row">
+  {{#if metadata.title}}
+    <h3 class="w-100">{{metadata.title}}</h3>
+  {{/if}}
+  <p class="w-100">
+    <ul>
+      <li><strong>Status:</strong> {{submission.status}}</li>
+      <li><strong>Metadata status:</strong> {{submission.metadataStatus}}</li>
+      <li><strong>Files status:</strong> {{submission.filesStatus}}</li>
+      <li>
+        <span><strong># of files:</strong> {{get submission "files.length"}}</span>
+      </li>
+    </ul>
+  </p>
+  <hr>
+  <p class="w-100">
+    <span class="w-100 font-italic">Metadata should be displayed nicely below</span>
+    <ul>
+      {{#each mdDisplay as |datum|}}
+        <li><strong>{{datum.label}}:</strong> {{datum.value}}</li>
+      {{/each}}
+    </ul>
+  </p>
+</div>

@@ -6,7 +6,9 @@
   {{#each model as |submission|}}
     <li>
       {{#if submission._metadataJson.title}}
-        <h3>{{submission._metadataJson.title}}</h3>
+        <h3>
+          <LinkTo @route="submission.details" @model={{submission}}>{{submission._metadataJson.title}}</LinkTo>
+        </h3>
       {{/if}}
       <ul>
         <li><strong>Status:</strong> {{submission.status}}</li>
