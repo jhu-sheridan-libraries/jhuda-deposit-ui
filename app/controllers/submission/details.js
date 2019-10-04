@@ -8,6 +8,11 @@ export default Controller.extend({
 
   mdDisplay: computed('metadata', function () {
     const md = this.get('metadata');
+
+    if (!md) {
+      return;
+    }
+
     const result = [];
 
     Object.keys(md).map((key) => {

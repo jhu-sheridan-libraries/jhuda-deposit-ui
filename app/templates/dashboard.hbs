@@ -9,6 +9,8 @@
         <h3>
           <LinkTo @route="submission.details" @model={{submission}}>{{submission._metadataJson.title}}</LinkTo>
         </h3>
+      {{else}}
+        <LinkTo @route="submission.details" @model={{submission}}>Click for details</LinkTo>
       {{/if}}
       <ul>
         <li><strong>Status:</strong> {{submission.status}}</li>
