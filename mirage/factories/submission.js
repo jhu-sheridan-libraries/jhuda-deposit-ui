@@ -62,5 +62,17 @@ export default Factory.extend({
         });
       }
     }
+  }),
+
+  randomMetadata: trait({
+    metadata: function () {
+      let md = { title: 'This submission has random metadata' };
+
+      for (let i = 0; i < 15; i++) {
+        md[faker.lorem.word()] = faker.lorem.sentence();
+      }
+
+      return JSON.stringify(md);
+    }
   })
 });

@@ -6,6 +6,11 @@ export default function(server) {
   // Draft submission with metadata, no files
   server.create('submission', 'hasMetadata', { metadataStatus: 'scanning', user: users[0] });
 
+  // Draft submission with random metadata and uploading files
+  server.create('submission', 'randomMetadata', 'metadataNeedsApproval', 'hasFiles', {
+    user: users[0]
+  });
+
   // Submission with files being uploaded and metadata that has been modified by the curator
   server.create('submission', 'hasMetadata', 'hasFiles', 'uploadingFiles', 'metadataNeedsApproval',
     {

@@ -7,7 +7,7 @@ import Route from '@ember/routing/route';
 export default Route.extend({
 
   model (params) {
-    return this.store.findRecord(params.submission_id);
+    return this.store.findRecord('submission', params.submission_id);
   }
 
 });
