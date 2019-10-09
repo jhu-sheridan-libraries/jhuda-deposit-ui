@@ -1,25 +1,40 @@
-<header id="app-header">
-  <nav class="navbar navbar-expand-lg justify-content-center sticky-top">
-    <LinkTo @route="dashboard" class="navbar-brand">
-      Sheridan Libraries Data Archive Deposit
-    </LinkTo>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
-        aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon fas fa-bars"></span>
-    </button>
-    <div id="navbar-content" class="collapse navbar-collapse">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <LinkTo @route="dashboard" class="nav-link">Dashboard</LinkTo>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">About (wip)</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Contact (wip)</a>
-        </li>
-      </ul>
+<header id="brand-header" class="nav">
+  <div class="container">
+    <div class="row">
+      <h3 id="brand-header-title" class="my-auto">
+        <LinkTo id="brand-header-title" @route="dashboard" class="">
+          Sheridan Libraries Data Archive Deposit
+        </LinkTo>
+      </h3>
+      <div class="ml-auto">
+        <img id="brand-logo" alt="Johns Hopkins University" src="/img/fullSizeLogo.png">
+      </div>
     </div>
-  </nav>
+
+  </div>
   {{yield}}
 </header>
+{{!-- Not really semantically correct, but sadly necessary to get it to match with PASS --}}
+<div id="brand-site-nav" class="container">
+  <div class="row">
+    <nav id="header-navbar" class="navbar navbar-expand-lg justify-content-center sticky-top">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content"
+          aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon fas fa-bars"></span>
+      </button>
+      <div id="navbar-content" class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <LinkTo @route="dashboard" class="nav-link">Dashboard</LinkTo>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">About (wip)</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Contact (wip)</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
