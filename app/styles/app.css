@@ -5,6 +5,19 @@ html {
 body {
   margin-bottom: 85px;
   overflow-x: hidden;
+  font-size: 1em !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+}
+h1 {
+  font-size: 1.7rem!important;
+}
+h2 {
+  font-size: 1.4rem!important;
+}
+h3 {
+  font-size: 1.3rem!important;
 }
 #app-footer {
   position: absolute;

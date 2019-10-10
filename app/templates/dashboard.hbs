@@ -2,7 +2,10 @@
 
 {{outlet}}
 
-<ul>
+<p>
+  Display a list of submissions here
+</p>
+{{!-- <ul>
   {{#each model as |submission|}}
     <li>
       {{#if submission._metadataJson.title}}
@@ -22,4 +25,18 @@
       </ul>
     </li>
   {{/each}}
-</ul>
+</ul> --}}
+
+<div class="row">
+  <div class="col-12">
+    {{models-table
+      data=model
+      columns=columns
+      themeInstance=themeInstance
+      showColumnsDropdown=false
+      filteringIgnoreCase=true
+      multipleColumnsSorting=false
+      useFilteringByColumns=false
+    }}
+  </div>
+</div>
