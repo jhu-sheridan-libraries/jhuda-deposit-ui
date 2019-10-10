@@ -1,7 +1,15 @@
-<h2>Dashboard stub</h2>
+
+<div class="row">
+  <div class="ml-auto">
+    <LinkTo class="btn btn-primary" @route="submission.workflow.agreements">Create new submission</LinkTo>
+  </div>
+</div>
 
 {{outlet}}
 
+<p>
+  Display a list of submissions here
+</p>
 <ul>
   {{#each model as |submission|}}
     <li>
