@@ -31,19 +31,5 @@
 </div>
 <div class="row">
   <h3 class="w-100">Files</h3>
-  {{#each (get submission "files") as |file|}}
-    <div class="col-4">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title m-0 p-0">{{file.name}}</h5>
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{file.description}}</p>
-          <p class="card-text">{{file.externalId}}</p>
-          <hr>
-          <p class="card-text"><strong>Status: </strong>{{file.status}}</p>
-        </div>
-      </div>
-    </div>
-  {{/each}}
+  <FilesList @files={{get submission "files"}}/>
 </div>

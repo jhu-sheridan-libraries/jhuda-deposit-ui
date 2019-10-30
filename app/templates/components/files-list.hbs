@@ -1,0 +1,32 @@
+{{!--
+  Display a files list for a Data Archive deposit
+  --}}
+
+{{yield}}
+
+<div class="row">
+  {{#each files as |file|}}
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title m-0 p-0">{{file.name}}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{file.description}}</p>
+          <p class="card-text">{{file.externalId}}</p>
+          <div class="card-text border-top border-bottom py-2 mb-2">
+            <strong>Status: </strong>{{file.status}}
+          </div>
+          <div class="clearfix pt-2">
+            <button type="button" class="btn btn-primary ml-2 float-right" onclick={{action "doRemove" file}}>
+              Remove
+            </button>
+            <button type="button" class="btn btn-primary float-right">
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
