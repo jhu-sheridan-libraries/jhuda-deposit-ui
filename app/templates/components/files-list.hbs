@@ -1,5 +1,6 @@
 {{!--
-  Display a files list for a Data Archive deposit
+  Display a files list for a Data Archive deposit. If there are any `requiredActions` on the parent
+  submission that point to any of the files displayed here, that file should be red.
   --}}
 
 {{yield}}
@@ -7,7 +8,7 @@
 <div class="row" data-test-files-list>
   {{#each filesWithActions as |grp|}}
     <div class="col-4">
-      <div class="card">
+      <div class="card border {{if grp.hasActions "border-danger text-danger"}}">
         <div class="card-header">
           <h5 class="card-title m-0 p-0">{{grp.file.name}}</h5>
         </div>
@@ -29,6 +30,13 @@
               </button>
             {{/if}}
           </div>
+          {{#if grp.hasActions}}
+            <div data-test-action-messages>
+              {{#each grp.actions as |action|}}
+                <div class="w-100 mb-2">{{action.details}}</div>
+              {{/each}}
+            </div>
+          {{/if}}
         </div>
       </div>
     </div>

@@ -57,8 +57,13 @@ export default Factory.extend({
         submission.update({ files })
       }
       if (submission.requiredActions.length === 0) {
+        const requiredActions = server.createList('submission-action', 1, 'isFile', {
+          key: files[0].id,
+          details: 'File change details'
+        });
+        requiredActions[0].update({ key: files[0].id });
         submission.update({
-          requiredActions: server.create('submission-action', 'isFile', { key: files[0].id })
+          requiredActions
         });
       }
     }

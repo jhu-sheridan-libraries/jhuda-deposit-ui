@@ -16,7 +16,8 @@ export default function(server) {
     {
       user: users[0],
       metadata: '{"title": "Submission with uploading files and metadata that needs approval"}'
-    });
+    }
+  );
 
   // Submission with files that need changing, metadata that is approved
   server.create('submission', 'fileMustChange', {

@@ -7,22 +7,29 @@ export default Component.extend({
   /**
    * Combine files with any associated actions so they can be displayed
    */
-  filesWithActions: computed('files', 'submissionActions', function () {
-    const composition = [];
+  filesWithActions: computed(
+    'files',
+    'submissionActions',
+    'submissionActions.@each.{key,description}',
+    function () {
+      const composition = [];
 
-    const actions = this.get('submissionActions') || A();
+      const actions = this.get('submissionActions') || A();
 
-    this.get('files').forEach((file) => {
-      const id = file.get('id');
+      this.get('files').forEach((file) => {
+        const id = file.get('id');
+        const fileActions = actions.filter(a => a.get('key') === id)
 
-      composition.push({
-        file,
-        actions: actions.filter(a => a.get('key') === id)
+        composition.push({
+          file,
+          hasActions: fileActions.length > 0,
+          actions: fileActions
+        });
       });
-    });
-    
-    return composition;
-  }),
+
+      return composition;
+    }
+  ),
 
   actions: {
     /**

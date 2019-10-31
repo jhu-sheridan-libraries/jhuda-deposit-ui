@@ -14,10 +14,10 @@ export default Controller.extend({
   },
   actions: {
     removeFile(file) {
-      debugger
+      // debugger
     },
     editFile(file) {
-      debugger
+      // debugger
     }
   }
 });
