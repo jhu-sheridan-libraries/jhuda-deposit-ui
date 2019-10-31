@@ -2,25 +2,49 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { A } from '@ember/array';
+import EmberObject from '@ember/object';
 
 module('Integration | Component | files-list', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  hooks.beforeEach(function () {
+    const files = A([
+      EmberObject.create({
+        id: 'moo_1',
+        name: 'File 1',
+        status: 'moo'
+      })
+    ]);
+    this.set('files', files);
+  });
 
-    await render(hbs`<FilesList />`);
+  /**
+   * Edit/Remove buttons should only show if appropriate actions are provided to the component
+   */
+  test('No buttons appear when no actions are provided', async function (assert) {
+    await render(hbs`<FilesList @files={{files}}/>`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom('[data-test-files-list]').exists();
+    assert.dom('[data-test-files-list]').includesText('File 1');
 
-    // Template block usage:
-    await render(hbs`
-      <FilesList>
-        template block text
-      </FilesList>
-    `);
+    assert.dom('[data-test-file-remove-btn]').doesNotExist();
+    assert.dom('[data-test-file-edit-btn]').doesNotExist();
+  });
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+  test('Buttons appear when actions are provided', async function (assert) {
+    const rm = () => {};
+    const ed = () => {};
+
+    this.set('rm', rm);
+    this.set('ed', ed);
+
+    await render(hbs`<FilesList @files={{files}} @removeAction={{rm}} @editAction={{ed}} />`);
+
+    assert.dom('[data-test-files-list]').exists();
+    assert.dom('[data-test-files-list]').includesText('File 1');
+
+    assert.dom('[data-test-file-remove-btn]').exists();
+    assert.dom('[data-test-file-edit-btn]').exists();
   });
 });

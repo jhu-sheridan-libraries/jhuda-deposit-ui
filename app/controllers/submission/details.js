@@ -23,20 +23,5 @@ export default Controller.extend({
     });
 
     return result;
-  }),
-
-  // TODO: example actions that can be used in the workflow Files step
-  actions: {
-    /**
-     * Remove the specified file
-     * @param {File} file
-     */
-    removeFile(file) {},
-
-    /**
-     * We can trigger an edit to the file somehow 
-     * @param {File} file 
-     */
-    editFile(file) {}
-  }
+  })
 });
