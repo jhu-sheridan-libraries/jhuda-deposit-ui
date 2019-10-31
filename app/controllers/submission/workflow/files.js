@@ -13,10 +13,10 @@ export default Controller.extend({
     this._super(...arguments);
   },
   actions: {
-    removeFile(file) {
+    removeFile(/* file */) {
       // debugger
     },
-    editFile(file) {
+    editFile(/* file */) {
       // debugger
     }
   }
