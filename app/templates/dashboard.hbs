@@ -1,7 +1,9 @@
-
-<div class="row">
-  <div class="ml-auto">
-    <LinkTo class="btn btn-primary" @route="submission.workflow.agreements">Create new submission</LinkTo>
+<div class="row mt-3 mb-3">
+  <div class="col-8">
+    <h2>Dashboard</h2>
+  </div>
+  <div class="col">
+    <LinkTo class="btn btn-primary float-right" @route="submission.workflow.agreements">Create new submission</LinkTo>
   </div>
 </div>
 
@@ -13,14 +15,17 @@
 
 <div class="row">
   <div class="col-12">
-    {{models-table
-      data=model
-      columns=columns
-      themeInstance=themeInstance
-      showColumnsDropdown=false
-      filteringIgnoreCase=true
-      multipleColumnsSorting=false
-      useFilteringByColumns=false
-    }}
+    <div class="submission-table">
+      {{models-table
+        data=model
+        columns=columns
+        themeInstance=themeInstance
+        showColumnsDropdown=false
+        filteringIgnoreCase=true
+        multipleColumnsSorting=false
+        useFilteringByColumns=false
+      }}
+    </div>
   </div>
 </div>
+
