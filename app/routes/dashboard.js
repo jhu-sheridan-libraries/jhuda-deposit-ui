@@ -10,11 +10,12 @@ export default Route.extend({
   setupController(controller) {
     this._super(...arguments);
     controller.set('columns', [
-      { propertyName: '_metadataJson.title', title: 'Submission Name', component: 'submission-title-cell' },
+      { title: 'Submission Name', component: 'submission-title-cell' },
       { propertyName: 'status', title: 'Submission Status' },
       { propertyName: 'metadataStatus', title: 'Metadata Status' },
       { propertyName: 'files.length', title: 'Files' },
-      { propertyName: 'filesStatus', title: 'Files Status' }
+      { propertyName: 'filesStatus', title: 'Files Status' },
+      { title: '', component: 'submission-action-cell' }
     ]);
     controller.set('themeInstance', Bootstrap4Theme.create());
   }

@@ -1,0 +1,9 @@
+{{!--
+  This component is intended to be used as a table cell within the `ember-models-table` on the
+  dashboard. It presents action buttons to a user when possible to allow the user to edit or
+  remove a submission.
+--}}
+
+<div>
+  <LinkTo @route="submission.new" @model={{submission}}>Edit</LinkTo>
+</div>

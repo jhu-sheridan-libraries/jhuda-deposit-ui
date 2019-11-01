@@ -5,27 +5,6 @@
 <p>
   Display a list of submissions here
 </p>
-{{!-- <ul>
-  {{#each model as |submission|}}
-    <li>
-      {{#if submission._metadataJson.title}}
-        <h3>
-          <LinkTo @route="submission.details" @model={{submission}}>{{submission._metadataJson.title}}</LinkTo>
-        </h3>
-      {{else}}
-        <LinkTo @route="submission.details" @model={{submission}}>Click for details</LinkTo>
-      {{/if}}
-      <ul>
-        <li><strong>Status:</strong> {{submission.status}}</li>
-        <li><strong>Metadata status:</strong> {{submission.metadataStatus}}</li>
-        <li><strong>Files status:</strong> {{submission.filesStatus}}</li>
-        <li>
-          <span><strong># of files:</strong> {{get submission "files.length"}}</span>
-        </li>
-      </ul>
-    </li>
-  {{/each}}
-</ul> --}}
 
 <div class="row">
   <div class="col-12">
