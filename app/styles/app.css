@@ -19,6 +19,9 @@ h2 {
 h3 {
   font-size: 1.3rem!important;
 }
+#brand-site-nav {
+  font-size: 18px;
+}
 #app-footer {
   position: absolute;
   left: 0;
