@@ -1,7 +1,10 @@
 import Route from '@ember/routing/route';
+import { hash } from 'rsvp';
 
 export default Route.extend({
   model() {
-    return this.modelFor('submission.workflow');
+    return hash({
+      submission: this.modelFor('submission.workflow')
+    });
   }
 });
