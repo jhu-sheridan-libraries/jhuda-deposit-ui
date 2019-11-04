@@ -33,7 +33,7 @@ h3 {
 }
 
 /* ember-models-table */
-/* .models-table-wrapper .input-group span.input-group-btn {
+.models-table-wrapper .input-group span.input-group-btn {
   visibility: hidden;
 }
 th.table-header i {
@@ -59,7 +59,7 @@ th.table-header i:not(.fa-sort-asc):not(.fa-sort-desc):before {
 }
 .models-table-wrapper tbody tr {
   background: #fdfdfd;
-} */
+}
 th {
   border-left: none!important;
   border-right: none!important;
