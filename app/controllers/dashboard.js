@@ -1,15 +1,6 @@
 import Controller from '@ember/controller';
-// import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
 
 export default Controller.extend({
-
-  // columns: computed(function () {
-  //   return [
-  //     {
-  //       propertyName: 'status',
-  //       title: 'Submission Name'
-  //     }
-  //   ];
-  // })
-
+  submissions: alias('model.submissions')
 });

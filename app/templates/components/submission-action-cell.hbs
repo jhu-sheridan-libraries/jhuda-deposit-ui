@@ -5,5 +5,16 @@
 --}}
 
 <div>
-  <LinkTo @route="submission.workflow">Edit</LinkTo>
+  {{#if editable}}
+    <LinkTo class="btn btn-primary" @route="submission.workflow" title="Edit">
+      <i class="fa fa-pencil"></i>
+      <span class="sr-only">Edit</span>
+    </LinkTo>
+  {{/if}}
+  {{#if removable}}
+    <button class="btn btn-outline-danger" {{action "delete"}} title="Delete">
+      <i class="fa fa-trash"></i>
+      <span class="sr-only">Delete</span>
+    </button>
+  {{/if}}
 </div>
