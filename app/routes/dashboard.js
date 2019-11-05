@@ -22,7 +22,8 @@ export default Route.extend({
     this._super(...arguments);
     controller.set('columns', [
       { title: 'Submission Name', component: 'submission-title-cell' },
-      { propertyName: 'status', title: 'Submission Status' },
+      // { propertyName: 'status', title: 'Submission Status' },
+      { title: 'Submission Status', component: 'submission-status-display' },
       { propertyName: 'metadataStatus', title: 'Metadata Status' },
       { propertyName: 'files.length', title: 'Files', className: 'text-center' },
       { propertyName: 'filesStatus', title: 'Files Status' },
