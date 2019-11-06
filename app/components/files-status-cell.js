@@ -7,6 +7,6 @@ export default Component.extend({
 
   status: computed('record', 'submission', function () {
     const submission = this.get('submission') || this.get('record');
-    return this.submissionHandler.submissionStatusDisplay(submission);
+    return this.submissionHandler.submissionFilesStatus(submission);
   })
 });

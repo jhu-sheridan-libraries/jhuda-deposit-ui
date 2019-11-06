@@ -1,0 +1,6 @@
+{{!-- Display a status label + description --}}
+{{#if status}}
+  <span title="{{status.description}}" class="{{status.class}}">
+    <i class="fas fa-info-circle"></i> {{status.label}}
+  </span>
+{{/if}}

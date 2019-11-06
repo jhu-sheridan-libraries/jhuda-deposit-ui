@@ -9,13 +9,13 @@
 <div>
   {{#if editable}}
     <LinkTo class="btn btn-primary" @route="submission.workflow" title="Edit">
-      <i class="fa fa-pencil"></i>
+      <i class="fas fa-edit"></i>
       <span class="sr-only">Edit</span>
     </LinkTo>
   {{/if}}
   {{#if removable}}
     <button class="btn btn-outline-danger" {{action "delete"}} title="Delete">
-      <i class="fa fa-trash"></i>
+      <i class="fas fa-trash-alt"></i>
       <span class="sr-only">Delete</span>
     </button>
   {{/if}}

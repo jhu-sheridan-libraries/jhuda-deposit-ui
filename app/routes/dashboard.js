@@ -22,11 +22,11 @@ export default Route.extend({
     this._super(...arguments);
     controller.set('columns', [
       { title: 'Submission Name', component: 'submission-title-cell' },
-      // { propertyName: 'status', title: 'Submission Status' },
       { title: 'Submission Status', component: 'submission-status-display' },
       { propertyName: 'metadataStatus', title: 'Metadata Status' },
       { propertyName: 'files.length', title: 'Files', className: 'text-center' },
-      { propertyName: 'filesStatus', title: 'Files Status' },
+      // { propertyName: 'filesStatus', title: 'Files Status' },
+      { title: 'Files Status', component: 'files-status-cell' },
       { title: '', component: 'submission-action-cell' }
     ]);
     controller.set('themeInstance', Bootstrap4Theme.create());
