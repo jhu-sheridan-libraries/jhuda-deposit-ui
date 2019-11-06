@@ -4,5 +4,6 @@ export default function() {
   this.get('/submissions');
   this.get('/submissions/:id');
   this.get('/files/:id');
+  this.get('/submission-actions/:id');
 
 }

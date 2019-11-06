@@ -5,6 +5,13 @@ export default Factory.extend({
   isMetadata: trait({ type: 'metadata' }),
   isFile: trait({ type: 'file' }),
 
+  badFile: trait({
+    key: 'file1',
+    type: 'file',
+    status: 'changeRequested',
+    details: faker.lorem.sentence
+  }),
+
   isModified: trait({
     key: 'one',
     status: 'modified',
