@@ -11,5 +11,5 @@ setEdition('octane');
 */
 module.exports = {
   "disableAnalytics": false
-}
+};
 
