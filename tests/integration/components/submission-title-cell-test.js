@@ -2,25 +2,28 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import EmberObject from '@ember/object';
 
 module('Integration | Component | submission-title-cell', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    this.set('record', EmberObject.create({
+      _metadataJson: { "title": "Moo" }
+    }));
+    await render(hbs`<SubmissionTitleCell @record={{record}} />`);
 
-    await render(hbs`<SubmissionTitleCell />`);
+    const text = this.element.textContent.trim();
+    assert.equal(text, 'Moo');
+  });
 
-    assert.equal(this.element.textContent.trim(), '');
+  test('Check display when no title exists', async function (assert) {
+    this.set('record', EmberObject.create({
+      _metadataJson: {}
+    }));
+    await render(hbs`<SubmissionTitleCell @record={{record}} />`);
 
-    // Template block usage:
-    await render(hbs`
-      <SubmissionTitleCell>
-        template block text
-      </SubmissionTitleCell>
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    const text = this.element.textContent.trim();
+    assert.equal(text, 'Click for details');
   });
 });

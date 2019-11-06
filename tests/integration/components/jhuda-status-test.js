@@ -7,20 +7,11 @@ module('Integration | Component | jhuda-status', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    this.set('status', { label: 'Moo', description: 'Moo Description', class: 'moo-class' });
+    await render(hbs`<JhudaStatus @status={{status}} />`);
 
-    await render(hbs`<JhudaStatus />`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      <JhudaStatus>
-        template block text
-      </JhudaStatus>
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('i.fa-info-circle').exists();
+    assert.dom('span.moo-class').exists();
+    assert.dom('span').hasText('Moo');
   });
 });

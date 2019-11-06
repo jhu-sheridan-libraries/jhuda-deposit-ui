@@ -2,25 +2,22 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import EmberObject from '@ember/object';
 
 module('Integration | Component | submission-action-cell', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
     await render(hbs`<SubmissionActionCell />`);
-
     assert.equal(this.element.textContent.trim(), '');
+  });
 
-    // Template block usage:
-    await render(hbs`
-      <SubmissionActionCell>
-        template block text
-      </SubmissionActionCell>
-    `);
+  test('Buttons show up for draft submissions', async function (assert) {
+    const record = EmberObject.create({ status: 'draft' });
+    this.set('record', record);
+    await render(hbs`<SubmissionActionCell @record={{record}} />`);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom('i.fa-edit').exists();
+    assert.dom('i.fa-trash-alt').exists();
   });
 });
