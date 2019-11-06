@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import { A } from '@ember/array';
 
 export default Component.extend({
@@ -12,22 +12,18 @@ export default Component.extend({
     'submissionActions',
     'submissionActions.@each.{key,description}',
     function () {
-      const composition = [];
+      const actions = get(this, 'submissionActions') || A();
 
-      const actions = this.get('submissionActions') || A();
+      return get(this, 'files').map((file) => {
+        const id = file.id;
+        const fileActions = actions.filter(a => a.key === id);
 
-      this.get('files').forEach((file) => {
-        const id = file.get('id');
-        const fileActions = actions.filter(a => a.get('key') === id)
-
-        composition.push({
+        return {
           file,
           hasActions: fileActions.length > 0,
           actions: fileActions
-        });
+        };
       });
-
-      return composition;
     }
   ),
 
@@ -37,9 +33,7 @@ export default Component.extend({
      * @param {File} file file obj
      */
     doRemove(file) {
-      if (this.removeAction) {
-        this.removeAction(file);
-      }
+      this.removeAction(file);
     },
 
     /**
@@ -47,9 +41,7 @@ export default Component.extend({
      * @param {File} file
      */
     doEdit(file) {
-      if (this.editAction) {
-        this.editAction(file);
-      }
+      this.editAction(file);
     }
   }
 });
