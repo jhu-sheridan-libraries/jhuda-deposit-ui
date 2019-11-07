@@ -18,7 +18,7 @@ export default Factory.extend({
   hasFiles: trait({
     afterCreate(submission, server) {
       if (submission.files.length === 0) {
-        submission.update({ files: server.createList('file', 3) })
+        submission.update({ files: server.createList('file', 3) });
       }
     }
   }),
@@ -54,11 +54,16 @@ export default Factory.extend({
     afterCreate(submission, server) {
       const files = server.createList('file', 3);
       if (submission.files.length === 0) {
-        submission.update({ files })
+        submission.update({ files });
       }
       if (submission.requiredActions.length === 0) {
+        const requiredActions = server.createList('submission-action', 1, 'isFile', {
+          key: files[0].id,
+          details: 'File change details'
+        });
+        requiredActions[0].update({ key: files[0].id });
         submission.update({
-          requiredActions: server.create('submission-action', 'isFile', { key: files[0].id })
+          requiredActions
         });
       }
     }
