@@ -67,6 +67,37 @@ export default Service.extend({
       default:
         return undefined;
     }
+  },
+
+  submissionMetadataStatus(submission) {
+    switch (submission.metadataStatus) {
+      case 'na':
+        return {
+          label: 'N/A',
+          description: 'No metadata has been added to this submission',
+          class: 'text-secondary'
+        };
+      case 'draft':
+        return {
+          label: 'Draft',
+          description: 'Metadata has not been finalized and can change at any time',
+          class: 'text-primary'
+        };
+      case 'requiresAction':
+        return {
+          label: 'Requires Action',
+          description: 'One or more metadata fields have been flagged and need your attention. Please check the submission page for details',
+          class: 'text-danger'
+        };
+      case 'approved':
+        return {
+          label: 'Approved',
+          description: 'The submission metadata ',
+          class: 'text-success'
+        };
+      default:
+        return { label: '', description: '' };
+    }
   }
 
 });
