@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'slarx-deposit-ui',
+    modulePrefix: 'jhu-deposit-ui',
     environment,
     rootURL: '/',
     locationType: 'auto',

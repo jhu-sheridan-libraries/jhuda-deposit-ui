@@ -1,0 +1,15 @@
+/* eslint-disable no-undef */
+const { setEdition } = require('@ember/edition-utils');
+
+setEdition('octane');
+
+/**
+  Ember CLI sends analytics information by default. The data is completely
+  anonymous, but there are times when you might want to disable this behavior.
+
+  Setting `disableAnalytics` to true will prevent any data from being sent.
+*/
+module.exports = {
+  "disableAnalytics": false
+};
+

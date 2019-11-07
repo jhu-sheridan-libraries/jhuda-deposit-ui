@@ -1,8 +1,8 @@
 {
-  "name": "slarx-deposit-ui",
+  "name": "jhu-deposit-ui",
   "version": "0.0.0",
   "private": true,
-  "description": "Sheridan Libaries Archive Deposit UI",
+  "description": "Johns Hopkins University Deposit UI for its data archive",
   "repository": "",
   "license": "MIT",
   "author": "",
@@ -18,8 +18,10 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@ember/edition-utils": "^1.1.1",
     "@ember/jquery": "~1.1.0",
     "@ember/optional-features": "^0.7.0",
+    "@glimmer/component": "^0.14.0-alpha.13",
     "broccoli-asset-rev": "^3.0.0",
     "ember-ajax": "^5.0.0",
     "ember-auto-import": "^1.5.3",
