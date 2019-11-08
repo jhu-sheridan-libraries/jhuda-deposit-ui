@@ -10,6 +10,11 @@ export default class WorkflowFilesController extends Controller {
     return get(this, 'submission.files');
   }
 
+  @computed('submission')
+  get submissionActions() {
+    return get(this, 'submission.requiredActions');
+  }
+
   @computed
   get editable() {
     const status = get(this, 'submission.status');
@@ -18,7 +23,8 @@ export default class WorkflowFilesController extends Controller {
 
   @action
   removeFile(/* file */) {
-    // debugger
+    // TODO: should have a confirm modal
+
   }
 
   @action
