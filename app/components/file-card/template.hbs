@@ -12,34 +12,36 @@
       {{/if}}
       <p class="card-text">{{file.externalId}}</p>
       <div class="card-text border-top border-bottom py-2 mb-2">
-        <strong>Status: </strong>{{file.status}}
-      </div>
-      <div class="clearfix pt-2">
-        {{#if editing}}
-          <button type="button" class="btn btn-outline-secondary ml-2 float-right" {{action cancelEdit}} title="Cancel">
-            <i class="fas fa-times"></i>
-            <span class="sr-only">Cancel</span>
-          </button>
-          <button type="button" class="btn btn-outline-success float-right" {{action saveMd}} title="Save changes">
-            <i class="fas fa-check"></i>
-            <span class="sr-only">Save</span>
-          </button>
-        {{else}}
-          {{#if @removeAction}}
-            <button type="button" class="btn btn-outline-danger ml-2 float-right" {{action @removeAction file}}
-                data-test-file-remove-btn title="Remove this file">
-              <i class="fas fa-trash-alt"></i>
-              <span class="sr-only">Remove</span>
-            </button>
-          {{/if}}
-          {{#if @editAction}}
-            <button type="button" class="btn btn-primary float-right" {{action toggleEditing}}
-                data-test-file-edit-btn title="Edit description for this file">
-              <i class="fas fa-edit"></i>
-              <span class="sr-only">Edit</span>
-            </button>
-          {{/if}}
-        {{/if}}
+        <div class="row">
+          <div class="col mt-1"><strong>Status: </strong>{{file.status}}</div>
+          <div class="col">
+            {{#if editing}}
+              <button type="button" class="btn btn-outline-secondary ml-2 float-right" {{action cancelEdit}} title="Cancel">
+                <i class="fas fa-times"></i>
+                <span class="sr-only">Cancel</span>
+              </button>
+              <button type="button" class="btn btn-outline-success float-right" {{action saveMd}} title="Save changes">
+                <i class="fas fa-check"></i>
+                <span class="sr-only">Save</span>
+              </button>
+            {{else}}
+              {{#if @removeAction}}
+                <button type="button" class="btn btn-outline-danger ml-2 float-right" {{action @removeAction file}}
+                    data-test-file-remove-btn title="Remove this file">
+                  <i class="fas fa-trash-alt"></i>
+                  <span class="sr-only">Remove</span>
+                </button>
+              {{/if}}
+              {{#if @editAction}}
+                <button type="button" class="btn btn-primary float-right" {{action toggleEditing}}
+                    data-test-file-edit-btn title="Edit description for this file">
+                  <i class="fas fa-edit"></i>
+                  <span class="sr-only">Edit</span>
+                </button>
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
       </div>
       {{#if hasActions}}
         <div data-test-action-messages>

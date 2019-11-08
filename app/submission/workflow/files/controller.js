@@ -25,4 +25,9 @@ export default class WorkflowFilesController extends Controller {
   editFile(/* file */) {
     // debugger
   }
+
+  @action
+  addFiles(/* files */) {
+
+  }
 }
