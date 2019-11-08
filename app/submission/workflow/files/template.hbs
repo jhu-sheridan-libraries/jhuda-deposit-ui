@@ -7,6 +7,8 @@
   want to be included in this submission.
 </p>
 
-<h3>Placeholder for file picker(s)</h3>
+<h3 class="border-top border-bottom w-100 py-4 my-4">Placeholder for file picker(s)</h3>
 
-<FilesList @files={{files}} @removeAction={{action "removeFile"}} @editAction={{action "editFile"}}/>
+<FilesList @files={{files}} @removeAction={{action "removeFile"}} @editAction={{action "editFile"}}
+    @editable={{editable}}/>
+{{!-- <FilesList @files={{files}}/> --}}

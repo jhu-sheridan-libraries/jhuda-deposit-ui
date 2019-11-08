@@ -1,23 +1,28 @@
 import Controller from '@ember/controller';
-import { computed, get } from '@ember/object';
+import { action, computed, get } from '@ember/object';
 import { alias } from '@ember/object/computed';
 
-export default Controller.extend({
-  submission: alias('model.submission'),
+export default class WorkflowFilesController extends Controller {
+  @alias('model.submission') submission;
 
-  files: computed('submission', function () {
+  @computed('submission')
+  get files() {
     return get(this, 'submission.files');
-  }),
-
-  init() {
-    this._super(...arguments);
-  },
-  actions: {
-    removeFile(/* file */) {
-      // debugger
-    },
-    editFile(/* file */) {
-      // debugger
-    }
   }
-});
+
+  @computed
+  get editable() {
+    const status = get(this, 'submission.status');
+    return status === 'draft' || status === 'requiresAction';
+  }
+
+  @action
+  removeFile(/* file */) {
+    // debugger
+  }
+
+  @action
+  editFile(/* file */) {
+    // debugger
+  }
+}
