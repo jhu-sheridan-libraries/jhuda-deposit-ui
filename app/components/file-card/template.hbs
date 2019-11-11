@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       {{#if editing}}
-        <Textarea @value={{tmpDescription}} class="w-100" rows="5"
+        <Textarea @value={{tmpDescription}} class="w-100" rows="5" data-test-description-editor
             placeholder="Enter a description for this file"/>
       {{else}}
         <p class="card-text">{{file.description}}</p>
@@ -16,11 +16,12 @@
           <div class="col mt-1"><strong>Status: </strong>{{file.status}}</div>
           <div class="col">
             {{#if editing}}
-              <button type="button" class="btn btn-outline-secondary ml-2 float-right" {{action cancelEdit}} title="Cancel">
+              <button type="button" class="btn btn-outline-secondary ml-2 float-right" {{action "cancelEdit"}} title="Cancel">
                 <i class="fas fa-times"></i>
                 <span class="sr-only">Cancel</span>
               </button>
-              <button type="button" class="btn btn-outline-success float-right" {{action saveMd}} title="Save changes">
+              <button type="button" class="btn btn-outline-success float-right" {{action "saveMd"}}
+                  data-test-save-filedesc-btn title="Save changes">
                 <i class="fas fa-check"></i>
                 <span class="sr-only">Save</span>
               </button>
@@ -33,7 +34,7 @@
                 </button>
               {{/if}}
               {{#if @editAction}}
-                <button type="button" class="btn btn-primary float-right" {{action toggleEditing}}
+                <button type="button" class="btn btn-primary float-right" {{action "toggleEditing"}}
                     data-test-file-edit-btn title="Edit description for this file">
                   <i class="fas fa-edit"></i>
                   <span class="sr-only">Edit</span>
