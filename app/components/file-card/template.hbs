@@ -1,56 +1,61 @@
-<div class="col-4">
-  <div class="card border {{if hasActions "border-danger text-danger"}}">
-    <div class="card-header">
-      <h5 class="card-title m-0 p-0">{{file.name}}</h5>
-    </div>
-    <div class="card-body">
-      {{#if editing}}
-        <Textarea @value={{tmpDescription}} class="w-100" rows="5" data-test-description-editor
-            placeholder="Enter a description for this file"/>
-      {{else}}
-        <p class="card-text">{{file.description}}</p>
-      {{/if}}
-      <p class="card-text">{{file.externalId}}</p>
-      <div class="card-text border-top border-bottom py-2 mb-2">
-        <div class="row">
-          <div class="col mt-1"><strong>Status: </strong>{{file.status}}</div>
-          <div class="col">
-            {{#if editing}}
-              <button type="button" class="btn btn-outline-secondary ml-2 float-right" {{action "cancelEdit"}} title="Cancel">
-                <i class="fas fa-times"></i>
-                <span class="sr-only">Cancel</span>
-              </button>
-              <button type="button" class="btn btn-outline-success float-right" {{action "saveMd"}}
-                  data-test-save-filedesc-btn title="Save changes">
-                <i class="fas fa-check"></i>
-                <span class="sr-only">Save</span>
-              </button>
-            {{else}}
-              {{#if @removeAction}}
-                <button type="button" class="btn btn-outline-danger ml-2 float-right" {{action @removeAction file}}
-                    data-test-file-remove-btn title="Remove this file">
-                  <i class="fas fa-trash-alt"></i>
-                  <span class="sr-only">Remove</span>
-                </button>
-              {{/if}}
-              {{#if @editAction}}
-                <button type="button" class="btn btn-primary float-right" {{action "toggleEditing"}}
-                    data-test-file-edit-btn title="Edit description for this file">
-                  <i class="fas fa-edit"></i>
-                  <span class="sr-only">Edit</span>
-                </button>
-              {{/if}}
-            {{/if}}
-          </div>
-        </div>
+<div class="row pt-2 border {{if hasActions 'border-danger border-bottom-0'}}">
+  <div class="col-3">
+    <p class="text-break">{{file.name}}</p>
+  </div>
+  <div class="col">
+    {{#if editing}}
+      <Textarea @value={{tmpDescription}} class="w-100" rows="4" data-test-description-editor
+          placeholder="Enter a description for this file" />
+    {{else}}
+      <p>{{file.description}}</p>
+    {{/if}}
+  </div>
+  <div class="col-1">
+    {{file.status}}
+  </div>
+  {{#if @editable}}
+    <div class="col-2">
+      <div class="h-100 d-flex align-items-center justify-content-end mt-n2">
+        {{#if editing}}
+          <button type="button" class="btn btn-outline-success" {{action "saveMd"}}
+              data-test-save-filedesc-btn title="Save changes">
+            <i class="fas fa-check"></i>
+            <span class="sr-only">Save</span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary ml-2" {{action "cancelEdit"}}
+              title="Cancel">
+            <i class="fas fa-times"></i>
+            <span class="sr-only">Cancel</span>
+          </button>
+        {{else}}
+          {{#if @editAction}}
+            <button type="button" class="btn btn-primary" {{action "toggleEditing"}}
+                data-test-file-edit-btn title="Edit description for this file">
+              <i class="fas fa-edit"></i>
+              <span class="sr-only">Edit</span>
+            </button>
+          {{/if}}
+          {{#if @removeAction}}
+            <button type="button" class="btn btn-outline-danger ml-2" {{action @removeAction file}}
+                data-test-file-remove-btn title="Remove this file">
+              <i class="fas fa-trash-alt"></i>
+              <span class="sr-only">Remove</span>
+            </button>
+          {{/if}}
+        {{/if}}
       </div>
-      {{#if hasActions}}
-        <div data-test-action-messages>
-          {{#each actions as |action|}}
-            <div class="w-100 mb-2">{{action.details}}</div>
-          {{/each}}
-        </div>
-      {{/if}}
+    </div>
+  {{/if}}
+</div>
+{{#if hasActions}}
+  <div class="row border border-danger border-top-0 text-danger py-2" data-test-action-messages>
+    <div class="col-2 text-right">Changes required:</div>
+    <div class="col">
+      <ul class="m-0 p-0" style="list-style: none;">
+        {{#each actions as |action|}}
+          <li class="">{{action.details}}</li>
+        {{/each}}
+      </ul>
     </div>
   </div>
-</div>
+{{/if}}

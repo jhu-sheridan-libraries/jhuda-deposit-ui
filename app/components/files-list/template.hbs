@@ -5,8 +5,9 @@
 
 {{yield}}
 
-<div class="row" data-test-files-list>
+<div class="container-fluid" data-test-files-list>
   {{#each filesWithActions as |grp|}}
-    <FileCard @fileGrp={{grp}} @removeAction={{@removeAction}} @editAction={{@editAction}}/>
+    <FileCard @fileGrp={{grp}} @removeAction={{@removeAction}} @editAction={{@editAction}}
+        @editable={{editable}}/>
   {{/each}}
 </div>

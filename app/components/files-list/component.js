@@ -4,6 +4,13 @@ import { A } from '@ember/array';
 
 // export default Component.extend({
 export default class FilesList extends Component {
+  files;
+  submissionActions;
+
+  editable;
+
+  removeAction;
+  editAction;
 
   /**
    * Combine files with any associated actions so they can be displayed
