@@ -11,7 +11,7 @@ export default Component.extend({
   /**
    * Only DRAFT submissions are removable (TODO:) by the submission creator
    */
-  removable: computed('submission', function () {
+  removable: computed('submission', 'editable', function () {
     return this.get('editable');
   }),
 
