@@ -28,18 +28,18 @@ module('Integration | Component | file-card', function(hooks) {
         EmberObject.create({ type: 'file', key: 'ThisIsAFile.moo', details: 'Your Moo needs a little somethin' })
       ])
     });
-    await render(hbs`<FileCard @fileGrp={{fileGrp}}/>`);
+    await render(hbs`<FileCard @fileGrp={{this.fileGrp}}/>`);
 
-    assert.dom('.card').includesText('The cows graze in the sun happily');
-    assert.dom('.card').includesText('ThisIsAFile.moo');
-    assert.dom('.card').includesText('Status: moo');
-    assert.dom('.card').includesText('Your Moo needs');
+    assert.dom('[data-test-file-card]').includesText('The cows graze in the sun happily');
+    assert.dom('[data-test-file-card]').includesText('ThisIsAFile.moo');
+    assert.dom('[data-test-file-card-status]').includesText('moo');
+    assert.dom('[data-test-action-messages]').includesText('Your Moo needs');
   });
 
   test('Clicking "Show" button should let a user edit the description', async function (assert) {
-    set(this, 'editAction', () => {});
+    set(this, 'editable', true);
 
-    await render(hbs`<FileCard @fileGrp={{fileGrp}} @editAction={{editAction}} />`);
+    await render(hbs`<FileCard @fileGrp={{this.fileGrp}} @editable={{this.editable}}/>`);
 
     assert.dom('[data-test-file-edit-btn]').exists();
     await click('[data-test-file-edit-btn]');
@@ -47,17 +47,27 @@ module('Integration | Component | file-card', function(hooks) {
     assert.dom('[data-test-description-editor]').exists();
   });
 
-  test('Editing description changes description on File', async function (assert) {
-    set(this, 'editAction', () => {});
+  test('Editing description saves the new description', async function (assert) {
+    assert.expect(1);
 
-    await render(hbs`<FileCard @fileGrp={{fileGrp}} @editAction={{editAction}} />`);
+    set(this, 'fileGrp', EmberObject.create({
+      file: EmberObject.create({
+        name: 'FileWithASave.moo',
+        description: 'The cows graze in the sun',
+        save: () => {
+          assert.ok(true);
+        }
+      })
+    }));
+    set(this, 'editable', true);
+
+    await render(hbs`<FileCard @fileGrp={{this.fileGrp}} @editable={{this.editable}} />`);
     await click('[data-test-file-edit-btn]');
 
     await fillIn('[data-test-description-editor]', 'The hip new moo');
 
     await click('[data-test-save-filedesc-btn]');
-
-    const file = this.fileGrp.file;
-    assert.equal(file.description, 'The hip new moo');
+    // const file = this.fileGrp.file;
+    // assert.equal(file.description, 'The hip new moo');
   });
 });

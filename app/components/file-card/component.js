@@ -24,15 +24,15 @@ export default class FileCardComponent extends Component {
     return this.args.index > 0;
   }
 
+  /**
+   * For some reason when using the action decorator, I get an error
+   * > TypeError: Cannot set property 'toggleEditing' of undefined
+   */
   toggleEditing() {
-    // if (!this.editing) {
-    //   set(this, 'tmpDescription', this.file.description);
-    // }
     set(this, 'editing', !this.editing);
   }
 
   saveMd() {
-    // set(this, 'file.description', this.tmpDescription);
     this.file.save();
     this.toggleEditing();
   }

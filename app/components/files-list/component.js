@@ -2,21 +2,20 @@ import Component from '@ember/component';
 import { computed, get } from '@ember/object';
 import { A } from '@ember/array';
 
-// export default Component.extend({
 export default class FilesList extends Component {
+  // Named properties passed into the component
   files;
   submissionActions;
 
   editable;
 
   removeAction;
-  editAction;
 
   /**
    * Combine files with any associated actions so they can be displayed
    */
   @computed(
-    'files',
+    'files.[]',
     'submissionActions',
     'submissionActions.@each.{key,description}',
   )

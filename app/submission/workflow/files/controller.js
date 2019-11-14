@@ -5,31 +5,26 @@ import { alias } from '@ember/object/computed';
 export default class WorkflowFilesController extends Controller {
   @alias('model.submission') submission;
 
-  @computed('submission')
+  @computed('submission.files.[]')
   get files() {
     return get(this, 'submission.files');
   }
 
-  @computed('submission')
+  @computed('submission.requiredActions.[]')
   get submissionActions() {
     return get(this, 'submission.requiredActions');
   }
 
-  @computed
+  @computed('submission.status')
   get editable() {
     const status = get(this, 'submission.status');
     return status === 'draft' || status === 'requiresAction';
   }
 
   @action
-  removeFile(/* file */) {
+  removeFile(file) {
     // TODO: should have a confirm modal
-
-  }
-
-  @action
-  editFile(/* file */) {
-    // debugger
+    file.destroyRecord();
   }
 
   @action
