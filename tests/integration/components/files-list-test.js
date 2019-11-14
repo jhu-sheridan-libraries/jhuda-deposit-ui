@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { A } from '@ember/array';
-import EmberObject from '@ember/object';
+import EmberObject, { set } from '@ember/object';
 
 module('Integration | Component | files-list', function(hooks) {
   setupRenderingTest(hooks);
@@ -34,12 +34,11 @@ module('Integration | Component | files-list', function(hooks) {
 
   test('Buttons appear when actions are provided', async function (assert) {
     const rm = () => {};
-    const ed = () => {};
 
-    this.set('rm', rm);
-    this.set('ed', ed);
+    set(this, 'rm', rm);
+    set(this, 'editable', true);
 
-    await render(hbs`<FilesList @files={{files}} @removeAction={{rm}} @editAction={{ed}} />`);
+    await render(hbs`<FilesList @files={{this.files}} @removeAction={{this.rm}} @editable={{this.editable}} />`);
 
     assert.dom('[data-test-files-list]').exists();
     assert.dom('[data-test-files-list]').includesText('File 1');
@@ -53,11 +52,11 @@ module('Integration | Component | files-list', function(hooks) {
       EmberObject.create({ id: 'moo_1', name: 'File 1' }),
       EmberObject.create({ id: 'moo_2', name: 'File 2' })
     ]);
-    this.set('files', files);
+    set(this, 'files', files);
 
     await render(hbs`<FilesList @files={{files}} />`);
 
-    assert.dom('[data-test-files-list] .card').exists({ count: 2 });
+    assert.dom('[data-test-file-card]').exists({ count: 2 });
   });
 
   test('SubmissionAction details appears on a file, when they exist', async function (assert) {
@@ -66,11 +65,11 @@ module('Integration | Component | files-list', function(hooks) {
       type: 'file',
       details: 'Moo details'
     });
-    this.set('actions', A([action]));
+    set(this, 'actions', A([action]));
 
     await render(hbs`<FilesList @files={{files}} @submissionActions={{actions}} />`);
 
     assert.dom('[data-test-action-messages]').exists();
-    assert.dom('[data-test-action-messages]').hasText('Moo details');
+    assert.dom('[data-test-action-messages]').includesText('Moo details');
   });
 });
