@@ -6,8 +6,8 @@
 {{yield}}
 
 <div class="container-fluid" data-test-files-list>
-  {{#each filesWithActions as |grp|}}
+  {{#each filesWithActions as |grp index|}}
     <FileCard @fileGrp={{grp}} @removeAction={{@removeAction}} @editAction={{@editAction}}
-        @editable={{editable}}/>
+        @editable={{editable}} @index={{index}}/>
   {{/each}}
 </div>

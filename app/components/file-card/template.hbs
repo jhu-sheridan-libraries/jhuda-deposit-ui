@@ -1,10 +1,10 @@
-<div class="row pt-2 border {{if hasActions 'border-danger border-bottom-0'}}">
+<div class="row pt-2 border {{if noTop "border-top-0"}} {{if hasActions "border-danger border-bottom-0" "border-dark"}}">
   <div class="col-3">
-    <p class="text-break">{{file.name}}</p>
+    <p class="text-break font-weight-bold">{{file.name}}</p>
   </div>
   <div class="col">
     {{#if editing}}
-      <Textarea @value={{tmpDescription}} class="w-100" rows="4" data-test-description-editor
+      <Textarea @value={{file.description}} class="w-100" rows="4" data-test-description-editor
           placeholder="Enter a description for this file" />
     {{else}}
       <p>{{file.description}}</p>
@@ -23,7 +23,7 @@
             <span class="sr-only">Save</span>
           </button>
           <button type="button" class="btn btn-outline-secondary ml-2" {{action "cancelEdit"}}
-              title="Cancel">
+              data-test-cancel-edit-btn title="Cancel">
             <i class="fas fa-times"></i>
             <span class="sr-only">Cancel</span>
           </button>
