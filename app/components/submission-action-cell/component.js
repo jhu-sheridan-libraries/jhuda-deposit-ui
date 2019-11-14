@@ -5,7 +5,7 @@ import { alias } from '@ember/object/computed';
 export default Component.extend({
   submission: alias('record'),
 
-  editable: computed('submission', function () {
+  editable: computed('submission.status', function () {
     return this.get('submission.status') === 'draft';
   }),
   /**
