@@ -7,7 +7,6 @@ export default class FileCardComponent extends Component {
   // Named arguments passed into the component
   fileGrp;
   removeAction;
-  editAction;
   editable;
   index;
 

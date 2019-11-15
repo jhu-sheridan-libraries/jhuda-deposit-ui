@@ -13,10 +13,12 @@ export default class FilesList extends Component {
 
   /**
    * Combine files with any associated actions so they can be displayed
+   * Expect 'files' and 'submissionActions' to be proxy objs
+   *
+   * NOTE: Somehow, making this a Glimmer component breaks this function
    */
   @computed(
     'files.[]',
-    'submissionActions',
     'submissionActions.@each.{key,description}',
   )
   get filesWithActions() {
