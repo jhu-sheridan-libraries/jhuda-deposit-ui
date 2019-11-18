@@ -5,9 +5,9 @@ export default Factory.extend({
   name: () => faker.system.fileName(),
   externalId: () => faker.system.filePath(),
   description: () => faker.lorem.sentences(3),
-  status: () => 'uploading',
+  status: () => 'processing',
 
-  isScanning: trait({ status: 'scanning' }),
+  isScanning: trait({ status: 'processing' }),
   changesRequired: trait({ status: 'changesRequired' }),
   isAccepted: trait({ status: 'accepted' })
 });

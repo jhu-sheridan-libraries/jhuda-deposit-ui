@@ -9,7 +9,7 @@ export default Model.extend({
   /** List of File objects associated with this submission */
   files: DS.hasMany('file', { async: true }),
 
-  /** enum: draft, uploadingFiles, scanning, changesRequired, complete */
+  /** enum: draft, requiresAction, complete, published */
   status: DS.attr('string'),  // Submission summary status
   metadataStatus: DS.attr('string'),
   filesStatus: DS.attr('string'),
