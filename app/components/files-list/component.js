@@ -1,30 +1,22 @@
-import Component from '@ember/component';
-import { computed, get } from '@ember/object';
+import Component from '@glimmer/component';
 import { A } from '@ember/array';
 
+/**
+ * Named properties passed to this component
+ *  - files
+ *  - submissionActions
+ *  - editable
+ *  - removeAction
+ */
 export default class FilesList extends Component {
-  // Named properties passed into the component
-  files;
-  submissionActions;
-
-  editable;
-
-  removeAction;
 
   /**
    * Combine files with any associated actions so they can be displayed
-   * Expect 'files' and 'submissionActions' to be proxy objs
-   *
-   * NOTE: Somehow, making this a Glimmer component breaks this function
    */
-  @computed(
-    'files.[]',
-    'submissionActions.@each.{key,description}',
-  )
   get filesWithActions() {
-    const actions = get(this, 'submissionActions') || A();
+    const actions = this.args.submissionActions || A();
 
-    return get(this, 'files').map((file) => {
+    return this.args.files.map((file) => {
       const id = file.id;
       const fileActions = actions.filter(a => a.key === id);
 
