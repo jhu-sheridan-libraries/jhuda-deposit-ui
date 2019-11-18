@@ -1,24 +1,21 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { computed, set } from '@ember/object';
+import { action, set } from '@ember/object';
 import { alias } from '@ember/object/computed';
 
+/**
+ * Named arguments passed into the component
+ *  - fileGrp
+ *  - removeAction
+ *  - editable
+ *  - index
+ */
 export default class FileCardComponent extends Component {
-  // Named arguments passed into the component
-  fileGrp;
-  removeAction;
-  editable;
-  index;
-
-  // Model aliases
   @alias('args.fileGrp.file') file;
-  @alias('args.fileGrp.actions') actions;
+  @alias('args.fileGrp.actions') subActions;
   @alias('args.fileGrp.hasActions') hasActions;
 
-  @tracked editing = false;
-  tmpDescription;
+  editing = false;
 
-  @computed('index')
   get noTop() {
     return this.args.index > 0;
   }
@@ -27,15 +24,18 @@ export default class FileCardComponent extends Component {
    * For some reason when using the action decorator, I get an error
    * > TypeError: Cannot set property 'toggleEditing' of undefined
    */
+  @action
   toggleEditing() {
     set(this, 'editing', !this.editing);
   }
 
+  @action
   saveMd() {
     this.file.save();
     this.toggleEditing();
   }
 
+  @action
   cancelEdit() {
     this.file.rollbackAttributes();
     this.toggleEditing();

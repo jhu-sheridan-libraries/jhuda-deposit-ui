@@ -18,12 +18,12 @@
     <div class="col-2">
       <div class="h-100 d-flex align-items-center justify-content-end mt-n2">
         {{#if this.editing}}
-          <button type="button" class="btn btn-outline-success" {{action this.saveMd}}
+          <button type="button" class="btn btn-outline-success" {{on "click" this.saveMd}}
               data-test-save-filedesc-btn title="Save changes">
             <i class="fas fa-check"></i>
             <span class="sr-only">Save</span>
           </button>
-          <button type="button" class="btn btn-outline-secondary ml-2" {{action this.cancelEdit}}
+          <button type="button" class="btn btn-outline-secondary ml-2" {{on "click" this.cancelEdit}}
               data-test-cancel-edit-btn title="Cancel">
             <i class="fas fa-times"></i>
             <span class="sr-only">Cancel</span>
@@ -52,7 +52,7 @@
     <div class="col-2 text-right">Changes required:</div>
     <div class="col">
       <ul class="m-0 p-0" >
-        {{#each this.actions as |action|}}
+        {{#each this.subActions as |action|}}
           <li class="">{{action.details}}</li>
         {{/each}}
       </ul>
