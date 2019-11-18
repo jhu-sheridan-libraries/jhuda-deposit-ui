@@ -36,7 +36,7 @@
             <span class="sr-only">Edit</span>
           </button>
           {{#if @removeAction}}
-            <button type="button" class="btn btn-outline-danger ml-2" {{action @removeAction this.file}}
+            <button type="button" class="btn btn-outline-danger ml-2" {{on "click" (fn @removeAction this.file)}}
                 data-test-file-remove-btn title="Remove this file">
               <i class="fas fa-trash-alt"></i>
               <span class="sr-only">Remove</span>
