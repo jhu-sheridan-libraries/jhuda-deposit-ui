@@ -1,0 +1,19 @@
+{{#bs-modal onHide=(action "hide") as |bs-modal|}}
+  {{#bs-modal.header}}
+    <h4 class="modal-title"><i class="glyphicon glyphicon-alert"></i>{{modal.title}}</h4>
+  {{/bs-modal.header}}
+  {{#bs-modal.body}}
+    {{component modal.component modal=modal}}
+  {{/bs-modal.body}}
+  {{#bs-modal.footer as |footer|}}
+    {{#bs-button type="outline-primary" onClick=(action bs-modal.close)}}Cancel{{/bs-button}}
+    {{#bs-button defaultText="Save"
+                 type="outline-primary"
+                 disabled=this.modalManager.save.isRunning
+                 onClick=(action bs-modal.submit) as |button|}}
+      {{#if this.modalManager.save.isRunning}}
+        <div class="spinner-border spinner-border-sm" role="status" />
+      {{/if}}
+    {{/bs-button}}
+  {{/bs-modal.footer}}
+{{/bs-modal}}
