@@ -1,0 +1,13 @@
+{{!--
+  This component is meant to be used as a table cell in the `ember-models-table` rendered
+  in the dashboard. It will display a submission title as a link to the submission details
+  page, or a dummy message if no title yet exists for the submission
+--}}
+<LinkTo @route="submission.details" @model={{submission}}>
+  {{#if (get submission "_metadataJson.title")}}
+    {{get submission "_metadataJson.title"}}
+  {{else}}
+    <em>Click for details</em>
+  {{/if}}
+</LinkTo>
+

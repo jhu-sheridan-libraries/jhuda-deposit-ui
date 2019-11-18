@@ -30,13 +30,13 @@ export default Factory.extend({
    * Files are being uploaded to the system. File metadata exists for these Files objects
    */
   uploadingFiles: trait({
-    filesStatus: 'uploading',
+    filesStatus: 'processing',
     metadataStatus: 'scanning'
   }),
 
   metadataNeedsApproval: trait({
-    filesStatus: 'scanning',
-    metadataStatus: 'requiresApproval',
+    filesStatus: 'processing',
+    metadataStatus: 'requiresAction',
 
     afterCreate(submission, server) {
       if (submission.requiredActions.length === 0) {
@@ -48,7 +48,7 @@ export default Factory.extend({
   }),
 
   fileMustChange: trait({
-    filesStatus: 'requiresChanges',
+    filesStatus: 'requiresAction',
     metadataStatus: 'approved',
 
     afterCreate(submission, server) {

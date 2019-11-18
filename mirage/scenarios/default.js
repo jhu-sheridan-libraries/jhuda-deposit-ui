@@ -4,7 +4,7 @@ export default function(server) {
   server.create('submission', { user: users[0] });  // Base draft submission
 
   // Draft submission with metadata, no files
-  server.create('submission', 'hasMetadata', { metadataStatus: 'scanning', user: users[0] });
+  server.create('submission', 'hasMetadata', { user: users[0] });
 
   // Draft submission with random metadata and uploading files
   server.create('submission', 'randomMetadata', 'metadataNeedsApproval', 'hasFiles', {

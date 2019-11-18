@@ -1,0 +1,22 @@
+{{!--
+  This component is intended to be used as a table cell within the `ember-models-table` on the
+  dashboard. It presents action buttons to a user when possible to allow the user to edit or
+  remove a submission.
+
+  We can add other actions here, such as a "Review" option for a metadata curator, for example.
+--}}
+
+<div class="py-1">
+  {{#if this.editable}}
+    <LinkTo class="btn btn-primary" @route="submission.workflow" title="Edit">
+      <i class="fas fa-edit"></i>
+      <span class="sr-only">Edit</span>
+    </LinkTo>
+  {{/if}}
+  {{#if this.removable}}
+    <button class="btn btn-outline-danger" {{action "delete"}} title="Delete">
+      <i class="fas fa-trash-alt"></i>
+      <span class="sr-only">Delete</span>
+    </button>
+  {{/if}}
+</div>

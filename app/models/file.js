@@ -6,6 +6,6 @@ export default Model.extend({
   externalId: DS.attr('string'),
   description: DS.attr('string'),
 
-  /** uploading, scanning, changesRequired, accepted, acceptedAndEncrypted? */
+  /** processing, changesRequired, accepted, published */
   status: DS.attr('string')
 });
