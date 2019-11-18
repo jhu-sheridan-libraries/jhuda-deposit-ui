@@ -30,7 +30,7 @@
           </button>
         {{else}}
           {{!-- The card handles editing, so no need to pass an editAction --}}
-          <button type="button" class="btn btn-primary" {{action this.toggleEditing}}
+          <button type="button" class="btn btn-primary" {{on "click" this.toggleEditing}}
               data-test-file-edit-btn title="Edit description for this file">
             <i class="fas fa-edit"></i>
             <span class="sr-only">Edit</span>
