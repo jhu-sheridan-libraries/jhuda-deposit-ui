@@ -16,7 +16,7 @@
     <li><strong>Metadata status:</strong> {{this.submission.metadataStatus}}</li>
     <li><strong>Files status:</strong> {{this.submission.filesStatus}}</li>
     <li>
-      <span><strong># of files:</strong> {{get submission "files.length"}}</span>
+      <span><strong># of files:</strong> {{this.submission.files.length}}</span>
     </li>
   </ul>
 </div>
@@ -30,5 +30,5 @@
 </div>
 <div class="row">
   <h3 class="w-100">Files</h3>
-  <FilesList @files={{get submission "files"}} @submissionActions={{get submission "requiredActions"}}/>
+  <FilesList @files={{this.submission.files}} @submissionActions={{this.submission.requiredActions}}/>
 </div>
