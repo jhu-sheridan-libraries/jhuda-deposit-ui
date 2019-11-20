@@ -1,24 +1,28 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 
-export default Component.extend({
-  submission: alias('record'),
+export default class SubmissionActionCell extends Component {
+  @service router;
 
-  editable: computed('submission.status', function () {
-    return this.get('submission.status') === 'draft';
-  }),
+  @alias('args.record') submission;
+  @alias('args.record.status') status;
+
+  get editable() {
+    return this.status === 'draft';
+  }
+
   /**
    * Only DRAFT submissions are removable (TODO:) by the submission creator
    */
-  removable: computed('submission', 'editable', function () {
-    return this.get('editable');
-  }),
-
-  actions: {
-    delete(/* submission */) {
-
-    }
+  get removable() {
+    return this.editable;
   }
 
-});
+  @action
+  delete() {
+    this.submission.destroyRecord();
+    this.router.transitionTo('/'); // Shouldn't trigger a transition if we're already on this route
+  }
+}
