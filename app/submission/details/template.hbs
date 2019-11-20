@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col">
-    {{#if metadata.title}}
-      <h2 class="w-100">{{metadata.title}}</h2>
+    {{#if this.metadata.title}}
+      <h2 class="w-100">{{this.metadata.title}}</h2>
     {{else}}
       <h2>Submission</h2>
     {{/if}}
@@ -23,7 +23,7 @@
 <div class="row">
   <span class="w-100 font-italic">Metadata should be displayed nicely below</span>
   <ul>
-    {{#each mdDisplay as |datum|}}
+    {{#each this.mdDisplay as |datum|}}
       <li><strong>{{datum.label}}:</strong> {{datum.value}}</li>
     {{/each}}
   </ul>
