@@ -19,6 +19,7 @@
       <span class="sr-only">Delete</span>
     </button>
     <BsModal
+        data-test-delete-confirm-modal
         @onHidden={{this.toggleDelete}}
         @position="center"
         @open={{this.showDeleteModal}} as |modal|>
@@ -29,7 +30,7 @@
       </modal.body>
       <modal.footer>
         <BsButton {{on "click" this.toggleDelete}}>Cancel</BsButton>
-        <BsButton @type="danger" {{on "click" this.delete}}>Delete</BsButton>
+        <BsButton @type="danger" {{on "click" this.delete}} data-test-delete-confirm-btn>Delete</BsButton>
       </modal.footer>
     </BsModal>
   {{/if}}
