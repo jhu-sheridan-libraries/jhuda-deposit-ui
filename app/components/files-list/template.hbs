@@ -5,40 +5,8 @@
 
 {{yield}}
 
-<div class="row" data-test-files-list>
-  {{#each filesWithActions as |grp|}}
-    <div class="col-4">
-      <div class="card border {{if grp.hasActions "border-danger text-danger"}}">
-        <div class="card-header">
-          <h5 class="card-title m-0 p-0">{{grp.file.name}}</h5>
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{grp.file.description}}</p>
-          <p class="card-text">{{grp.file.externalId}}</p>
-          <div class="card-text border-top border-bottom py-2 mb-2">
-            <strong>Status: </strong>{{grp.file.status}}
-          </div>
-          <div class="clearfix pt-2">
-            {{#if removeAction}}
-              <button type="button" class="btn btn-primary ml-2 float-right" onclick={{action "doRemove" grp.file}} data-test-file-remove-btn>
-                Remove
-              </button>
-            {{/if}}
-            {{#if editAction}}
-              <button type="button" class="btn btn-primary float-right" data-test-file-edit-btn>
-                Edit
-              </button>
-            {{/if}}
-          </div>
-          {{#if grp.hasActions}}
-            <div data-test-action-messages>
-              {{#each grp.actions as |action|}}
-                <div class="w-100 mb-2">{{action.details}}</div>
-              {{/each}}
-            </div>
-          {{/if}}
-        </div>
-      </div>
-    </div>
+<div class="container-fluid" data-test-files-list>
+  {{#each this.filesWithActions as |grp index|}}
+    <FileCard @fileGrp={{grp}} @removeAction={{@removeAction}} @editable={{@editable}} @index={{index}}/>
   {{/each}}
 </div>
