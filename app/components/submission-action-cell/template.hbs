@@ -14,7 +14,7 @@
     </LinkTo>
   {{/if}}
   {{#if this.removable}}
-    <button class="btn btn-outline-danger" {{action "delete"}} title="Delete">
+    <button class="btn btn-outline-danger" {{on "click" this.delete}} title="Delete" data-test-delete-btn>
       <i class="fas fa-trash-alt"></i>
       <span class="sr-only">Delete</span>
     </button>

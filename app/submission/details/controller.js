@@ -1,27 +1,20 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 
-export default Controller.extend({
-  submission: alias('model'),
-  metadata: alias('submission._metadataJson'),
+export default class SubmissionDetailsController extends Controller {
+  @alias('model') submission;
+  @alias('submission._metadataJson') metadata;
 
-  mdDisplay: computed('metadata', function () {
-    const md = this.get('metadata');
-
-    if (!md) {
-      return;
+  get mdDisplay() {
+    if (!this.metadata) {
+      return undefined;
     }
 
-    const result = [];
-
-    Object.keys(md).map((key) => {
-      result.push({
+    return Object.keys(this.metadata).map((key) => {
+      return {
         label: key,
-        value: md[key]
-      });
+        value: this.metadata[key]
+      };
     });
-
-    return result;
-  })
-});
+  }
+}
