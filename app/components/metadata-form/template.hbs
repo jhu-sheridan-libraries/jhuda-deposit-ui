@@ -1,6 +1,7 @@
 <BsForm
   local-class="metadata-form"
-  @model={{changeset this.args.metadata MetadataValidations}}
+  @model={{this.metadataChangeset}}
+  @novalidate={{true}}
   @onSubmit={{action this.saveMetadata}} as |form|>
 
   <form.element
@@ -21,6 +22,65 @@
     @placeholder="Keywords"
     @property="keywords" />
 
+  <form.element
+    @controlType="textarea"
+    @label="Data Use"
+    @placeholder="Data Use"
+    @property="dataUse" />
+
+  <form.element
+    @controlType="textarea"
+    @label="Software Use"
+    @placeholder="Software Use"
+    @property="softwareUse" />
+
+  {{#each authorChangesets as |author index|}}
+    <div class="d-flex flex-row align-items-center">
+
+      <form.element
+        local-class="with-validation-height"
+        class="w-50 m-1"
+        @controlType="text"
+        @label="Author Name"
+        @placeholder="Author Name"
+        @model={{author}}
+        @property="name"
+        as |el|>
+
+        <el.control
+          class="input-lg"
+          value={{author.name}}
+        />
+      </form.element>
+
+      <form.element
+        local-class="with-validation-height"
+        class="w-50 m-1"
+        @controlType="text"
+        @label="Author Affiliation"
+        @placeholder="Author Affiliation"
+        @model={{author}}
+        @property="affiliation" as |el|>
+
+        <div class="d-flex flex-row">
+          <el.control
+            class="input-lg"
+            value={{author.affiliation}} />
+
+          {{#unless (eq @metadata.authors.length 1)}}
+            <FaIcon
+              class="text-danger m-2"
+              @icon="trash"
+              @size="1x"
+              {{on "click" (fn this.removeAuthor author index)}} />
+          {{/unless}}
+        </div>
+      </form.element>
+    </div>
+
+  {{/each}}
+
+
   <BsButton
     @defaultText="Save"
     @type="outline-primary"
@@ -31,57 +91,9 @@
   </BsButton>
 </BsForm>
 
-<h3 class="mr-auto">Authors</h3>
+<h4 class="mr-auto">Authors</h4>
 <button
   class="btn btn-outline-primary"
   {{on "click" this.addAuthor}}>
   Add Author
 </button>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Affiliation</th>
-    </tr>
-  </thead>
-  <tbody>
-  {{#each this.args.metadata.authors as |author|}}
-    <tr>
-      <td>{{author.name}}</td>
-      <td>{{author.affiliation}}</td>
-    </tr>
-  {{/each}}
-  </tbody>
-</table>
-{{#each this.args.metadata.authors as |author index|}}
-  <BsForm
-    local-class="author-form"
-    @model={{changeset author AuthorValidations}}
-    @onSubmit={{action this.saveAuthor}} as |form|>
-    <div class="d-flex flex-row align-items-center">
-
-      <form.element
-        class="w-50 m-1"
-        @controlType="text"
-        @label="Author Name"
-        @placeholder="Author Name"
-        @property="name" />
-
-      <form.element
-        class="w-50 m-1"
-        @controlType="text"
-        @label="Author Affiliation"
-        @placeholder="Author Affiliation"
-        @property="affiliation" />
-
-      {{#unless (eq this.args.metadata.authors.length 1)}}
-        <FaIcon
-          class="text-danger m-1"
-          @icon="times"
-          @size="1x"
-          {{on "click" (fn this.removeAuthor author)}} />
-      {{/unless}}
-    </div>
-  </BsForm>
-{{/each}}

@@ -7,6 +7,8 @@ export default Model.extend({
   keywords: DS.attr('string'),
   contactName: DS.attr('string'),
   contactEmail: DS.attr('string'),
+  dataUse: DS.attr('string'),
+  softwareUse: DS.attr('string'),
   grants: DS.hasMany('grant'),
-  authors: DS.hasMany('author')
+  authors: DS.hasMany('author'),
 });

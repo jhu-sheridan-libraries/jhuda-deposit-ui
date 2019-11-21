@@ -2,7 +2,6 @@ form {
   width: 100%;
 }
 
-.author-info {
-  display: flex;
-
+.with-validation-height {
+  min-height: 5.813rem;
 }

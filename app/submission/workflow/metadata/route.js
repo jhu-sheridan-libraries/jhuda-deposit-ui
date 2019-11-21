@@ -9,7 +9,7 @@ export default Route.extend({
                     }),
                     await this.store.createRecord('author', {
                       name: 'Meow',
-                      affiliation: ''
+                      affiliation: null
                     })
                   ];
     let metadata = await this.store.createRecord('metadata', { authors });

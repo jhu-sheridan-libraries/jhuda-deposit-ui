@@ -3,38 +3,59 @@ import MetadataValidations from '../../validations/metadata';
 import AuthorValidations from '../../validations/author';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Changeset from 'ember-changeset';
+import lookupValidator from 'ember-changeset/utils/validator-lookup';
+import { A } from '@ember/array';
 
 export default class MetadataFormComponent extends Component {
   @service store;
 
-  MetadataValidations = MetadataValidations;
-  AuthorValidations = AuthorValidations;
+  constructor() {
+    super(...arguments);
 
+    this.metadataChangeset = new Changeset(this.args.metadata, lookupValidator(MetadataValidations), MetadataValidations);
 
-  @action
-  saveMetadata(formData) {
-    formData.save();
-    return true;
+    this.authorChangesets = this.args.metadata.authors.toArray().map((author) => {
+      return new Changeset(author, lookupValidator(AuthorValidations), AuthorValidations);
+    });
+
+    this.allChangesets = A();
+    this.allChangesets.pushObject(this.metadataChangeset);
+    this.allChangesets.pushObjects(this.authorChangesets);
   }
 
   @action
-  saveAuthor(formData) {
-    formData.save();
+  async saveMetadata() {
+    debugger;
+    await this.allChangesets.forEach((changeset) => changeset.validate());
+    if (this.allChangesets.isEvery('isValid')) {
+      this.allChangesets.forEach((changeset) => changeset.execute());
+    }
 
     return true;
   }
 
   @action
   addAuthor() {
-    this.store.createRecord('author', {
-      name: '',
-      affiliation: '',
+    let author = this.store.createRecord('author', {
+      name: null,
+      affiliation: null,
       metadata: this.args.metadata
     });
+    let authorChangeset = new Changeset(author, lookupValidator(AuthorValidations), AuthorValidations);
+    this.authorChangesets.pushObject(authorChangeset);
+    this.allChangesets.pushObject(authorChangeset);
   }
 
   @action
-  removeAuthor(author) {
+  removeAuthor(authorChangeset, index) {
+    let author = authorChangeset._content;
+    this.authorChangesets.removeAt(index);
     author.deleteRecord();
+  }
+
+  @action
+  updateName(event) {
+// debugger;
   }
 }
