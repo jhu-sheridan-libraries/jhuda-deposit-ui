@@ -14,6 +14,9 @@ export default Route.extend({
                   ];
     let metadata = await this.store.createRecord('metadata', { authors });
 
+    // let sub = await this.store.findRecord('submission', 6);
+
+    // return sub._metadataJson;
     return metadata;
   }
 });

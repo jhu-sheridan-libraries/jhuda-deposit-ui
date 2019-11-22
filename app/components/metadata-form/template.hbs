@@ -1,38 +1,58 @@
 <BsForm
   local-class="metadata-form"
-  @model={{this.metadataChangeset}}
   @novalidate={{true}}
+  @model={{this.metadataChangeset}}
   @onSubmit={{action this.saveMetadata}} as |form|>
+
+  <div class="d-flex flex-row mt-1">
+    <h5 class="mr-auto">Details</h5>
+  </div>
 
   <form.element
     @controlType="text"
     @label="Collection Title"
+    @model={{this.metadataChangeset}}
     @placeholder="Collection Title"
+        @showValidationOn={{array "focusout" "change" "input"}}
     @property="collectionTitle" />
 
   <form.element
     @controlType="textarea"
     @label="Description"
+    @model={{this.metadataChangeset}}
     @placeholder="Description"
     @property="description" />
 
   <form.element
     @controlType="text"
     @label="Keywords"
+    @model={{this.metadataChangeset}}
     @placeholder="Keywords"
     @property="keywords" />
 
   <form.element
     @controlType="textarea"
     @label="Data Use"
+    @model={{this.metadataChangeset}}
     @placeholder="Data Use"
     @property="dataUse" />
 
   <form.element
     @controlType="textarea"
     @label="Software Use"
+    @model={{this.metadataChangeset}}
     @placeholder="Software Use"
     @property="softwareUse" />
+
+  <div class="d-flex flex-row mt-4">
+    <h5 class="mr-auto">Authors</h5>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      {{on "click" this.addAuthor}}>
+      Add Author
+    </button>
+  </div>
 
   {{#each authorChangesets as |author index|}}
     <div class="d-flex flex-row align-items-center">
@@ -44,6 +64,7 @@
         @label="Author Name"
         @placeholder="Author Name"
         @model={{author}}
+        @showValidationOn={{array "focusout" "change" "input"}}
         @property="name"
         as |el|>
 
@@ -60,6 +81,7 @@
         @label="Author Affiliation"
         @placeholder="Author Affiliation"
         @model={{author}}
+        @showValidationOn={{array "focusout" "change" "input"}}
         @property="affiliation" as |el|>
 
         <div class="d-flex flex-row">
@@ -67,7 +89,7 @@
             class="input-lg"
             value={{author.affiliation}} />
 
-          {{#unless (eq @metadata.authors.length 1)}}
+          {{#unless (eq authorChangesets.length 1)}}
             <FaIcon
               class="text-danger m-2"
               @icon="trash"
@@ -77,10 +99,85 @@
         </div>
       </form.element>
     </div>
-
   {{/each}}
 
+  <div class="d-flex flex-row mt-4">
+    <h5 class="mr-auto">Grants</h5>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      {{on "click" this.addGrant}}>
+      Add Grant
+    </button>
+  </div>
 
+  {{#each grantChangesets as |grant index|}}
+    <div class="d-flex flex-row align-items-center">
+
+      <form.element
+        local-class="with-validation-height"
+        class="w-33 m-1"
+        @controlType="text"
+        @label="Award Number"
+        @placeholder="Award Number"
+        @model={{grant}}
+        @property="awardNumber"
+        as |el|>
+
+        <el.control
+          class="input-lg"
+          value={{grant.awardNumber}}
+        />
+      </form.element>
+
+      <form.element
+        local-class="with-validation-height"
+        class="w-33 m-1"
+        @controlType="text"
+        @label="Project Name"
+        @placeholder="Project Name"
+        @model={{grant}}
+        @property="projectName"
+        as |el|>
+
+        <el.control
+          class="input-lg"
+          value={{grant.projectName}}
+        />
+      </form.element>
+
+      <form.element
+        local-class="with-validation-height"
+        class="w-33 m-1"
+        @controlType="text"
+        @label="Funding Agency"
+        @placeholder="Funding Agency"
+        @model={{grant}}
+        @property="fundingAgency" as |el|>
+
+        <div class="d-flex flex-row">
+          <el.control
+            class="input-lg"
+            value={{grant.fundingAgency}} />
+
+          {{#unless (eq grantChangesets.length 1)}}
+            <FaIcon
+              class="text-danger m-2"
+              @icon="trash"
+              @size="1x"
+              {{on "click" (fn this.removeGrant author index)}} />
+          {{/unless}}
+        </div>
+      </form.element>
+    </div>
+  {{/each}}
+
+<button
+  type="button"
+  {{on "click" this.saveMetadata}}
+>
+  No submit save
+</button>
   <BsButton
     @defaultText="Save"
     @type="outline-primary"
@@ -91,9 +188,3 @@
   </BsButton>
 </BsForm>
 
-<h4 class="mr-auto">Authors</h4>
-<button
-  class="btn btn-outline-primary"
-  {{on "click" this.addAuthor}}>
-  Add Author
-</button>
