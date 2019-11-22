@@ -41,7 +41,7 @@ export default Factory.extend({
     afterCreate(submission, server) {
       if (submission.requiredActions.length === 0) {
         submission.update({
-          requiredActions: server.create('submission-action', 'isMetadata', 'isModified')
+          requiredActions: server.createList('submission-action', 1, 'isMetadata', 'isModified')
         });
       }
     }
