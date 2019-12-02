@@ -12,7 +12,7 @@
     {{/if}}
   </LinkTo>
   {{#if this.hasActions}}
-    <div class="text-danger">
+    <div class="text-danger" data-test-sub-messages>
       <ul>
         {{#each this.actionMessages as |message|}}
           <li>{{message}}</li>
