@@ -47,5 +47,14 @@ module.exports = function(environment) {
     // here you can enable a production-specific feature
   }
 
+  /*
+   * ###########################################################################
+   *    Some properties will be configured externally
+   * ###########################################################################
+   */
+  if (process.env.EMBER_ROOT_URL) {
+    ENV.rootURL = process.env.EMBER_ROOT_URL;
+  }
+
   return ENV;
 };

@@ -1,0 +1,111 @@
+version: '3.1'
+
+services:
+  ember:
+    build: ember-dev/
+    image: jhuda/ember-dev
+    container_name: ember
+    env_file: .env
+    volumes:
+      - ../:/app:Z
+      - /app/node_modules
+    ports:
+      - '${EMBER_PORT}:${EMBER_PORT}'
+    networks:
+      - back
+
+  fcrepo:
+    image: jhuda/fcrepo@sha256:646f98030c00d94ef5fc7d6a92debf8229f172d39bad5e6ea47f2b5c76d149be
+    container_name: fcrepo
+    env_file: .env
+    networks:
+      - front
+      - back
+    ports:
+      - "${FCREPO_JETTY_PORT}:${FCREPO_JETTY_PORT}"
+    volumes:
+      - jhuda-data:/data
+    depends_on:
+      - assets
+      - activemq
+
+  activemq:
+    image: jhuda/activemq@sha256:4975941f1325e17c53cfb14cb695e4e7b07f4f8c86c05a4418e1a03941f9dff5
+    container_name: activemq
+    env_file: .env
+    networks:
+      - front
+      - back
+
+  proxy:
+    image: jhuda/proxy@sha256:3040fb8ff4cf2e9d60aa836ffae76d55f486523e30324ccc393568563fe1e27a
+    container_name: proxy
+    networks:
+      - front
+      - back
+    ports:
+      - "80:80"
+      - "443:443"
+
+  idp:
+    image: jhuda/idp@sha256:dd0f61e3a1881b7d22aab8c8968b0fa925336dc4859dceb19eba247bab5be9ed
+    container_name: idp
+    depends_on:
+      - ldap
+    environment:
+      - JETTY_MAX_HEAP=64m
+      - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
+      - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
+    expose:
+      - "4443"
+    networks:
+      - back
+    secrets:
+      - source: idp_backchannel
+      - source: idp_browser
+      - source: idp_encryption
+      - source: idp_signing
+      - source: idp_sealer
+
+  sp:
+    image: jhuda/sp@sha256:a86e5d20f0ef0248929ff5b16ec4d01ccfb2640372c624b53b74240396572ce7
+    container_name: sp
+    networks:
+      - back
+    secrets:
+      - source: sp_key
+
+  ldap:
+    image: jhuda/ldap@sha256:b7b00f1301227b8a654ca4c313856ed1047efdd061b9d10771030767c3dee0ad
+    container_name: ldap
+    networks:
+      - back
+
+  assets:
+    image: jhuda/assets@sha256:37b543615d649556dafe4fb1fc6a5a09fd5467d1c5ba21ebf07883fd64d44180
+    volumes:
+      - jhuda-data:/data
+
+volumes:
+  jhuda-data:
+    driver: local
+
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge
+
+secrets:
+  idp_backchannel:
+    file: ./secrets/idp/idp-backchannel.p12
+  idp_browser:
+    file: ./secrets/idp/idp-browser.p12
+  idp_encryption:
+    file: ./secrets/idp/idp-encryption.key
+  idp_signing:
+    file: ./secrets/idp/idp-signing.key
+  idp_sealer:
+    file: ./secrets/idp/sealer.jks
+  sp_key:
+    file: ./secrets/sp/sp-key.pem
