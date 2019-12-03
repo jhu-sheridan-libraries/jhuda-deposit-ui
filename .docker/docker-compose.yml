@@ -2,6 +2,16 @@ version: '3.1'
 
 services:
   ember:
+    # build:
+    #   context: ember-dev/
+    #   args:
+    #     EMBER_ROOT_URL: "${EMBER_ROOT_URL}"
+    #     FEDORA_ADAPTER_BASE: "${FEDORA_ADAPTER_BASE}"
+    #     FEDORA_ADAPTER_CONTEXT: "${FEDORA_ADAPTER_CONTEXT}"
+    #     FEDORA_ADAPTER_DATA: "${FEDORA_ADAPTER_DATA}"
+    #     FEDORA_ADAPTER_ES: "${FEDORA_ADAPTER_ES}"
+    #     FEDORA_ADAPTER_USER_NAME: "${FEDORA_ADAPTER_USER_NAME}"
+    #     FEDORA_ADAPTER_PASSWORD: "${FEDORA_ADAPTER_PASSWORD}"
     build: ember-dev/
     image: jhuda/ember-dev
     container_name: ember
