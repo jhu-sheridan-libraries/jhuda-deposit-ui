@@ -8,7 +8,7 @@ import { isArray } from '@ember/array';
  */
 export default class SubmissionTitleCell extends Component {
   @alias('args.record') submission;
-  @alias('record.requiredActions') subActions;
+  @alias('args.record.requiredActions') subActions;
 
   get hasActions() {
     return isArray(this.subActions) && this.subActions.length > 0;
