@@ -7,7 +7,7 @@ import { isArray } from '@ember/array';
  *  - record {Submission}
  */
 export default class SubmissionTitleCell extends Component {
-  @alias('record') submission;
+  @alias('args.record') submission;
   @alias('record.requiredActions') subActions;
 
   get hasActions() {
