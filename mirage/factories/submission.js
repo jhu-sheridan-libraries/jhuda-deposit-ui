@@ -1,8 +1,8 @@
-import { Factory, association, trait } from 'ember-cli-mirage';
+import { Factory, trait } from 'ember-cli-mirage';
 import faker from 'faker';
 
 export default Factory.extend({
-  user: association(),
+  user: '',
 
   accessUrl: undefined,
   status: () => 'draft',

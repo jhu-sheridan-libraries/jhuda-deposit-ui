@@ -1,11 +1,9 @@
 import DS from 'ember-data';
-const { Model } = DS;
+const { Model, attr } = DS;
 
-export default Model.extend({
-  key: DS.attr('string'),
-  /** file, metadata */
-  type: DS.attr('string'),
-  /** modified, changeRequested */
-  status: DS.attr('string'),
-  details: DS.attr('string')
-});
+export default class SubmissionAction extends Model {
+  @attr key;
+  @attr type; // file, metadata
+  @attr status; // modified, changeRequested
+  @attr description;
+}

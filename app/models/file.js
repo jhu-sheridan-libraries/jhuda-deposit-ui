@@ -1,11 +1,16 @@
 import DS from 'ember-data';
-const { Model } = DS;
+const { Model, attr } = DS;
 
-export default Model.extend({
-  name: DS.attr('string'),
-  externalId: DS.attr('string'),
-  description: DS.attr('string'),
-
-  /** processing, changesRequired, accepted, published */
-  status: DS.attr('string')
-});
+export default class File extends Model {
+  @attr('string') name;
+  @attr('string') origin; // upload, onedrive
+  @attr('string') externalId;
+  @attr('string') description;
+  @attr('string') status; // processing, changesRequired, accepted, published
+  @attr('string') downloadUrl;
+  @attr('string') externalPath;
+  @attr('string') checksum;
+  @attr('string') checksumFunction;
+  @attr('number') size;
+  @attr('string') location;
+}
