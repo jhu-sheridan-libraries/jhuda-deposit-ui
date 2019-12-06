@@ -1,4 +1,4 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { alias } from '@ember/object/computed';
 import { isArray } from '@ember/array';
 
