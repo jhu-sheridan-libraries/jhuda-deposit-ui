@@ -1,6 +1,20 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { alias } from '@ember/object/computed';
+import { isArray } from '@ember/array';
 
-export default Component.extend({
-  submission: alias('record')
-});
+/**
+ * Named properties passed to this component:
+ *  - record {Submission}
+ */
+export default class SubmissionTitleCell extends Component {
+  @alias('args.record') submission;
+  @alias('args.record.requiredActions') subActions;
+
+  get hasActions() {
+    return isArray(this.subActions) && this.subActions.length > 0;
+  }
+
+  get actionMessages() {
+    return this.subActions.mapBy('details');
+  }
+}

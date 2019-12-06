@@ -26,7 +26,7 @@ export default Route.extend({
       { title: 'Metadata Status', component: 'metadata-status-cell' },
       { propertyName: 'files.length', title: 'Files', className: 'text-center' },
       { title: 'Files Status', component: 'files-status-cell' },
-      { title: '', component: 'submission-action-cell' }
+      { title: '', component: 'submission-action-cell', className: 'submission-action-cell' }
     ]);
     controller.set('themeInstance', Bootstrap4Theme.create());
   }
