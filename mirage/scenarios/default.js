@@ -25,6 +25,4 @@ export default function(server) {
     metadataStatus: 'approved',
     metadata: '{"title": "Submission with a bad file, but good metadata"}'
   });
-
-  server.create('submission', 'hasDefinedMetadata');
 }

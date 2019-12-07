@@ -80,40 +80,4 @@ export default Factory.extend({
       return JSON.stringify(md);
     }
   }),
-
-  hasDefinedMetadata: trait({
-    metadata: function () {
-      let md = {
-        collectionTitle: 'This submission has random metadata',
-        description: 'An interesting description',
-        keywords: null,
-        dataUse: 'Use the data in this way, not in that way.',
-        softwareUse: 'Use the software in this way, not in that way',
-        authors: [
-          {
-            name: 'moo',
-            affiliation: 'jhu'
-          },
-          {
-            name: 'meo',
-            affiliation: 'nih'
-          }
-        ],
-        grants: [
-          {
-            awardNumber: '1343242',
-            projectName: 'Project 1',
-            fundingAgency: 'nih'
-          },
-          {
-            awardNumber: '1345555',
-            projectName: 'Project 2',
-            fundingAgency: 'jhu'
-          }
-        ]
-      };
-
-      return JSON.stringify(md);
-    }
-  })
 });

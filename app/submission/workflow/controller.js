@@ -1,58 +1,67 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
+import { action } from '@ember/object';
 
 /**
  * 'routeOrder' defines the order in which child routes should be presented
  * to the user.
  */
-export default Controller.extend({
-  router: service(),
+export default class SubmissionWorkflowController extends Controller {
+  @service router;
 
-  routeOrder: () => ['agreements', 'metadata', 'files'],
-
-  routePrefix: computed('router.currentRouteName', function () {
-    const path = this.get('router').get('currentRouteName').split('.');
-    return path.slice(0, path.length -1).join('.');
-  }),
-  currentRoute: computed('router.currentRouteName', function () {
-    return this.get('router').get('currentRouteName').split('.').pop();
-  }),
-
-  newRoute(simpleName) {
-    return `${this.get('routePrefix')}.${simpleName}`;
-  },
-
-  actions: {
-    back() {
-      const order = this.get('routeOrder')();
-      const index = order.indexOf(this.get('currentRoute'));
-
-      if (index <= 0) {
-        return;
-      }
-
-      this.transitionToRoute(this.newRoute(order[index-1]));
-    },
-
-    next() {
-      const order = this.get('routeOrder')();
-      const index = order.indexOf(this.get('currentRoute'));
-
-      if (index === -1) {
-        this.transitionToRoute(this.newRoute(order[0]));
-        return;
-      } else if (index === order.length - 1) {
-        // Do nothing
-        return;
-      }
-
-      this.transitionToRoute(this.newRoute(order[index+1]));
-    },
-
-    cancel() {
-      this.transitionToRoute('dashboard');
-    }
+  get routeOrder() {
+    return [
+      'agreements',
+      'metadata',
+      'files',
+    ];
   }
 
-});
+  get routePrefix() {
+    const path = get(this, 'router.currentRouteName').split('.');
+
+    return path.slice(0, path.length -1).join('.');
+  }
+
+  get currentRoute() {
+    return get(this, 'router.currentRouteName').split('.').pop();
+  }
+
+  newRoute(simpleName) {
+    return `${this.routePrefix}.${simpleName}`;
+  }
+
+  @action
+  back() {
+    const order = this.routeOrder;
+    const index = order.indexOf(this.currentRoute);
+
+    if (index <= 0) {
+      return;
+    }
+
+    this.transitionToRoute(this.newRoute(order[index-1]));
+  }
+
+  @action
+  next() {
+    const order = this.routeOrder;
+    const index = order.indexOf(this.currentRoute);
+
+    if (index === -1) {
+      this.transitionToRoute(this.newRoute(order[0]));
+      return;
+    } else if (index === order.length - 1) {
+      // Do nothing
+      return;
+    }
+
+    this.transitionToRoute(this.newRoute(order[index+1]));
+  }
+
+  @action
+  cancel() {
+    this.transitionToRoute('dashboard');
+  }
+}

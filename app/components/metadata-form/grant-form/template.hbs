@@ -1,0 +1,78 @@
+<AnimatedContainer local-class="grant-form">
+  <div class="d-flex flex-row p-1">
+    <h5 class="mt-4 mr-auto">Grants</h5>
+    <button
+      type="button"
+      class="btn btn-outline-primary mt-4"
+      {{on "click" this.addGrant}}>
+      Add Grant
+    </button>
+  </div>
+
+  {{#animated-each @grantChangesets use=transition as |grant index|}}
+    <BsForm
+    @model={{grant}}
+    @hideValidationsOnSubmit={{false}}
+    @onSubmit={{action this.noop}}
+    as |form|>
+      <div class="d-flex flex-row align-items-center">
+
+        <form.element
+          local-class="with-validation-height"
+          class="w-50 m-1"
+          @controlType="text"
+          @label="Award Number"
+          @placeholder="Award Number"
+          @showValidationOn={{array "focusout" "change" "input"}}
+          @property="awardNumber"
+          as |el|>
+
+          <el.control
+            class="input-lg"
+            value={{grant.awardNumber}}
+          />
+        </form.element>
+
+        <form.element
+          local-class="with-validation-height"
+          class="w-50 m-1"
+          @controlType="text"
+          @label="Project Name"
+          @placeholder="Project Name"
+          @showValidationOn={{array "focusout" "change" "input"}}
+          @property="projectName"
+          as |el|>
+
+          <el.control
+            class="input-lg"
+            value={{grant.projectName}}
+          />
+        </form.element>
+
+        <form.element
+          local-class="with-validation-height"
+          class="w-50 m-1"
+          @controlType="text"
+          @label="Funding Agency"
+          @placeholder="Funding Agency"
+          @showValidationOn={{array "focusout" "change" "input"}}
+          @property="fundingAgency" as |el|>
+
+          <div class="d-flex flex-row">
+            <el.control
+              class="input-lg"
+              value={{grant.fundingAgency}} />
+
+            {{#if (not (eq @grantChangesets.length 1))}}
+              <FaIcon
+                class="text-danger m-2"
+                @icon="trash"
+                @size="1x"
+                {{on "click" (fn this.removeGrant grant index)}} />
+            {{/if}}
+          </div>
+        </form.element>
+      </div>
+    </BsForm>
+  {{/animated-each}}
+</AnimatedContainer>

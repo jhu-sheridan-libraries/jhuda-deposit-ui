@@ -9,6 +9,10 @@ export default Model.extend({
   contactEmail: DS.attr('string'),
   dataUse: DS.attr('string'),
   softwareUse: DS.attr('string'),
+
   grants: DS.hasMany('grant'),
   authors: DS.hasMany('author'),
+  contacts: DS.hasMany('contact'),
+
+  submission: DS.belongsTo('submission'),
 });

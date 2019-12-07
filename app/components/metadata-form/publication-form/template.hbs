@@ -1,0 +1,62 @@
+<AnimatedContainer local-class="publication-form">
+  <div class="d-flex flex-row p-1">
+    <h5 class="mt-4 mr-auto">Publications</h5>
+    <button
+      type="button"
+      class="btn btn-outline-primary mt-4"
+      {{on "click" this.addPublication}}>
+      Add Publication
+    </button>
+  </div>
+
+  {{#animated-each @publicationChangesets use=transition as |publication index|}}
+    <BsForm
+    @model={{publication}}
+    @hideValidationsOnSubmit={{false}}
+    @onSubmit={{action this.noop}}
+    as |form|>
+      <div class="d-flex flex-row align-items-center">
+
+        <form.element
+          local-class="with-validation-height"
+          class="w-50 m-1"
+          @controlType="text"
+          @label="DOI"
+          @placeholder="DOI"
+          @showValidationOn={{array "focusout" "change" "input"}}
+          @property="doi"
+          as |el|>
+
+          <el.control
+            class="input-lg"
+            value={{publication.doi}}
+          />
+        </form.element>
+
+        <form.element
+          local-class="with-validation-height"
+          class="w-50 m-1"
+          @controlType="text"
+          @label="Title"
+          @placeholder="Title"
+          @showValidationOn={{array "focusout" "change" "input"}}
+          @property="title" as |el|>
+
+          <div class="d-flex flex-row">
+            <el.control
+              class="input-lg"
+              value={{publication.title}} />
+
+            {{#if (not (eq @publicationChangesets.length 1))}}
+              <FaIcon
+                class="text-danger m-2"
+                @icon="trash"
+                @size="1x"
+                {{on "click" (fn this.removePublication publication index)}} />
+            {{/if}}
+          </div>
+        </form.element>
+      </div>
+    </BsForm>
+  {{/animated-each}}
+</AnimatedContainer>

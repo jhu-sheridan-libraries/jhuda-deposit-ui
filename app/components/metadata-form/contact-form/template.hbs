@@ -1,0 +1,63 @@
+<AnimatedContainer local-class="contact-form">
+  <div class="d-flex flex-row p-1">
+    <h5 class="mt-4 mr-auto">Contacts</h5>
+    <button
+      type="button"
+      class="btn btn-outline-primary mt-4"
+      {{on "click" this.addContact}}>
+      Add Contact
+    </button>
+  </div>
+
+  {{#animated-each @contactChangesets use=transition as |contact index|}}
+    <BsForm
+    local-class="contact-form"
+    @model={{contact}}
+    @hideValidationsOnSubmit={{false}}
+    @onSubmit={{action this.noop}}
+    as |form|>
+      <div class="d-flex flex-row align-items-center">
+
+        <form.element
+          local-class="with-validation-height"
+          class="w-50 m-1"
+          @controlType="text"
+          @label="Contact Name"
+          @placeholder="Contact Name"
+          @showValidationOn={{array "focusout" "change" "input"}}
+          @property="name"
+          as |el|>
+
+          <el.control
+            class="input-lg"
+            value={{contact.name}}
+          />
+        </form.element>
+
+        <form.element
+          local-class="with-validation-height"
+          class="w-50 m-1"
+          @controlType="text"
+          @label="Contact Email"
+          @placeholder="Contact Email"
+          @showValidationOn={{array "focusout" "change" "input"}}
+          @property="email" as |el|>
+
+          <div class="d-flex flex-row">
+            <el.control
+              class="input-lg"
+              value={{contact.email}} />
+
+            {{#if (not (eq @contactChangesets.length 1))}}
+              <FaIcon
+                class="text-danger m-2"
+                @icon="trash"
+                @size="1x"
+                {{on "click" (fn this.removeContact contact index)}} />
+            {{/if}}
+          </div>
+        </form.element>
+      </div>
+    </BsForm>
+  {{/animated-each}}
+</AnimatedContainer>

@@ -8,4 +8,18 @@
   change if an error is found.
 </p>
 
-<MetadataForm @metadata={{this.submission}} />
+<MetadataForm
+  @next={{this.next}}
+  @metadata={{this.submission}} as |form|>
+
+  <form.detail />
+  <form.contact />
+  <form.author />
+  <form.grant />
+  <form.publication />
+
+  <WorkflowFooter
+    @cancel={{this.cancel}}
+    @back={{this.back}}
+    @next={{form.validateAndExecuteChanges}} />
+</MetadataForm>
