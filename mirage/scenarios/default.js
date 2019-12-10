@@ -4,7 +4,6 @@ import submissions from '../fixtures/submissions';
 
 export default function(server) {
   // server.loadFixtures();
-
   files.forEach((file) => {
     server.create('file', { _source: file });
   });
@@ -16,5 +15,4 @@ export default function(server) {
   submissions.forEach((sub) => {
     server.create('submission', { _source: sub });
   });
-
 }

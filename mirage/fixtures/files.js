@@ -26,7 +26,7 @@ export default [
     externalId: 'ASDFG1234JI2',
     downloadUrl: 'https://example.com/moo2',
     externalPath: '/home/moo2',
-    checksum: 12345,
+    checksum: '12345',
     checksumFunction: 'moo5',
     size: 4096,
     location: ''
@@ -44,7 +44,7 @@ export default [
     externalPath: '/home/thing/thing2/',
     checksum: '78904',
     checksumFunction: 'moo256',
-    sizes: 8192,
+    size: 8192,
     location: '/tmp/home/thing/thing2/'
   },
   {

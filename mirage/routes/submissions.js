@@ -1,6 +1,12 @@
 import { Response } from 'miragejs';
 
 export default function (server) {
+  server.get('https://archive.local/fcrepo/rest/submissions/**', (schema, request) => {
+    const submissions = schema.submissions.all();
+    const sub = submissions.models.find(submission => submission.attrs._source['@id'] === request.url);
+
+    return sub.attrs._source;
+  });
   /**
    * Mock the response from fcrepo for creating a submission
    */
