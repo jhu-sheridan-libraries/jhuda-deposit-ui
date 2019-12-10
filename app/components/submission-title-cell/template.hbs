@@ -3,11 +3,21 @@
   in the dashboard. It will display a submission title as a link to the submission details
   page, or a dummy message if no title yet exists for the submission
 --}}
-<LinkTo @route="submission.details" @model={{submission}}>
-  {{#if (get submission "_metadataJson.title")}}
-    {{get submission "_metadataJson.title"}}
-  {{else}}
-    <em>Click for details</em>
+<div>
+  <LinkTo @route="submission.details" @model={{this.submission}}>
+    {{#if (get submission "_metadataJson.title")}}
+      {{get submission "_metadataJson.title"}}
+    {{else}}
+      <em>Click for details</em>
+    {{/if}}
+  </LinkTo>
+  {{#if this.hasActions}}
+    <div class="text-danger" data-test-sub-messages>
+      <ul>
+        {{#each this.actionMessages as |message|}}
+          <li>{{message}}</li>
+        {{/each}}
+      </ul>
+    </div>
   {{/if}}
-</LinkTo>
-
+</div>
