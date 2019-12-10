@@ -10,7 +10,7 @@ export default class SubmissionActionCell extends Component {
   @alias('args.record.status') status;
 
   get editable() {
-    return this.status === 'draft';
+    return this.status === 'draft' || this.status === 'requiresAction';
   }
 
   /**
