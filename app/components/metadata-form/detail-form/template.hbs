@@ -1,11 +1,15 @@
+
+<div class="d-flex flex-row mt-1 p-1 w-100">
+  <h5 class="mr-auto">Details</h5>
+</div>
+
 <BsForm
+  class="p-1"
   local-class="metadata-form"
   @model={{@metadataChangeset}}
-  @onSubmit={{action this.noop}} as |form|>
-
-  <div class="d-flex flex-row mt-1">
-    <h5 class="mr-auto">Details</h5>
-  </div>
+  @onSubmit={{action this.noop}}
+  data-test-detail-form
+  as |form|>
 
   <form.element
     @controlType="text"
@@ -13,7 +17,8 @@
     @model={{@metadataChangeset}}
     @placeholder="Collection Title"
     @showValidationOn={{array "focusout" "change" "input"}}
-    @property="collectionTitle" />
+    @property="collectionTitle"
+    data-test-collection-title-input />
 
   <form.element
     @controlType="textarea"

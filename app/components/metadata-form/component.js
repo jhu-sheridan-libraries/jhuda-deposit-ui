@@ -41,8 +41,6 @@ export default class MetadataFormComponent extends Component {
     });
   }
 
-
-
   /**
    * validates and executes any changes in the changesets on the backing
    * models. does not persist changes to the backend.

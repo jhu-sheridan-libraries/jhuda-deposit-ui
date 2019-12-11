@@ -13,6 +13,7 @@ export default Model.extend({
   grants: DS.hasMany('grant'),
   authors: DS.hasMany('author'),
   contacts: DS.hasMany('contact'),
+  publications: DS.hasMany('publication'),
 
   submission: DS.belongsTo('submission'),
 });

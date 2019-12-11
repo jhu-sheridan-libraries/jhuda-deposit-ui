@@ -5,8 +5,7 @@ import Controller, {
 } from '@ember/controller';
 
 export default class SubmissionWorkflowMetadataController extends Controller {
-  @alias('model') submission;
-  @alias('submission._metadataJson') metadata;
+  @alias('model') metadata;
 
   @controller('submission.workflow') parentController;
 

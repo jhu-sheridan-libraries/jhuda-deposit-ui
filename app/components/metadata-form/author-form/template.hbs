@@ -4,7 +4,8 @@
     <button
       type="button"
       class="btn btn-outline-primary mt-4"
-      {{on "click" this.addAuthor}}>
+      {{on "click" this.addAuthor}}
+      data-test-add-author-button>
       Add Author
     </button>
   </div>
@@ -14,6 +15,7 @@
     @model={{author}}
     @hideValidationsOnSubmit={{false}}
     @onSubmit={{action this.noop}}
+    data-test-author-form
     as |form|>
       <div class="d-flex flex-row align-items-center">
 
@@ -25,6 +27,7 @@
           @placeholder="Author Name"
           @showValidationOn={{array "focusout" "change" "input"}}
           @property="name"
+          data-test-author-name-input
           as |el|>
 
           <el.control
@@ -52,7 +55,8 @@
                 class="text-danger m-2"
                 @icon="trash"
                 @size="1x"
-                {{on "click" (fn this.removeAuthor author index)}} />
+                {{on "click" (fn this.removeAuthor author index)}}
+                data-test-delete-author-button />
             {{/if}}
           </div>
         </form.element>

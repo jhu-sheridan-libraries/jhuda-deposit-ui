@@ -10,17 +10,21 @@ module('Integration | Component | workflow-footer', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<WorkflowFooter />`);
+    this.set('cancel', () => {
+      assert.ok(true);
+    });
+    this.set('back', () => {
+      assert.ok(true);
+    });
+    this.set('next', () => {
+      assert.ok(true);
+    });
 
-    assert.equal(this.element.textContent.trim(), '');
+    await render(hbs`<WorkflowFooter
+                      @cancel={{this.cancel}}
+                      @back={{this.back}}
+                      @next={{this.next}} />`);
 
-    // Template block usage:
-    await render(hbs`
-      <WorkflowFooter>
-        template block text
-      </WorkflowFooter>
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.equal(this.element.textContent.trim(), 'Cancel\n    \n    \n      Back\n      Next');
   });
 });
