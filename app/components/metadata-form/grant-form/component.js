@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset/utils/validator-lookup';
-import GrantValidations from '../../../validations/grant';
+import GrantValidations from 'jhu-deposit-ui/validations/grant';
 import { inject as service } from '@ember/service';
 import fade from 'ember-animated/transitions/fade';
 

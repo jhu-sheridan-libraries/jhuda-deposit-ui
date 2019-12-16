@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset/utils/validator-lookup';
-import PublicationValidations from '../../../validations/publication';
+import PublicationValidations from 'jhu-deposit-ui/validations/publication';
 import { inject as service } from '@ember/service';
 
 export default class MetadataFormPublicationFormComponent extends Component {

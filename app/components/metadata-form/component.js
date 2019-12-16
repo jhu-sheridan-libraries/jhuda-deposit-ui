@@ -1,9 +1,9 @@
 import Component from '@glimmer/component';
-import MetadataValidations from '../../validations/metadata';
-import AuthorValidations from '../../validations/author';
-import GrantValidations from '../../validations/grant';
-import PublicationValidations from '../../validations/publication';
-import ContactValidations from '../../validations/contact';
+import MetadataValidations from 'jhu-deposit-ui/validations/metadata';
+import AuthorValidations from 'jhu-deposit-ui/validations/author';
+import GrantValidations from 'jhu-deposit-ui/validations/grant';
+import PublicationValidations from 'jhu-deposit-ui/validations/publication';
+import ContactValidations from 'jhu-deposit-ui/validations/contact';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Changeset from 'ember-changeset';
