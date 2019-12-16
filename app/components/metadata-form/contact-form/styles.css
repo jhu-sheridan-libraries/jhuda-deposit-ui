@@ -1,0 +1,8 @@
+.contact-form {
+  width: 100%;
+  overflow: hidden;
+}
+
+.with-validation-height {
+  min-height: 5.813rem;
+}

@@ -1,0 +1,50 @@
+
+<div class="d-flex flex-row mt-1 p-1 w-100">
+  <h5 class="mr-auto">Details</h5>
+</div>
+
+<BsForm
+  class="p-1"
+  local-class="metadata-form"
+  @model={{@metadataChangeset}}
+  @onSubmit={{action this.noop}}
+  data-test-detail-form
+  as |form|>
+
+  <form.element
+    @controlType="text"
+    @label="Collection Title"
+    @model={{@metadataChangeset}}
+    @placeholder="Collection Title"
+    @showValidationOn={{array "focusout" "change" "input"}}
+    @property="collectionTitle"
+    data-test-collection-title-input />
+
+  <form.element
+    @controlType="textarea"
+    @label="Description"
+    @model={{@metadataChangeset}}
+    @placeholder="Description"
+    @property="description" />
+
+  <form.element
+    @controlType="text"
+    @label="Keywords"
+    @model={{@metadataChangeset}}
+    @placeholder="Keywords"
+    @property="keywords" />
+
+  <form.element
+    @controlType="textarea"
+    @label="Data Use"
+    @model={{@metadataChangeset}}
+    @placeholder="Data Use"
+    @property="dataUse" />
+
+  <form.element
+    @controlType="textarea"
+    @label="Software Use"
+    @model={{@metadataChangeset}}
+    @placeholder="Software Use"
+    @property="softwareUse" />
+</BsForm>

@@ -1,0 +1,29 @@
+{{#if (has-block)}}
+  {{yield (hash
+    detail=(component "metadata-form/detail-form" metadataChangeset=this.metadataChangeset)
+    author=(component "metadata-form/author-form" metadata=@metadata authorChangesets=this.authorChangesets)
+    contact=(component "metadata-form/contact-form" metadata=@metadata contactChangesets=this.contactChangesets)
+    grant=(component "metadata-form/grant-form" metadata=@metadata grantChangesets=this.grantChangesets)
+    publication=(component "metadata-form/publication-form" metadata=@metadata publicationChangesets=this.publicationChangesets)
+    validateAndExecuteChanges=(action this.validateAndExecuteChanges)
+  )}}
+{{else}}
+  <MetadataForm::DetailForm
+    @metadataChangeset={{this.metadataChangeset}} />
+
+  <MetadataForm::ContactForm
+    @metadata={{@metadata}}
+    @contactChangesets={{this.contactChangesets}} />
+
+  <MetadataForm::AuthorForm
+    @metadata={{@metadata}}
+    @authorChangesets={{this.authorChangesets}} />
+
+  <MetadataForm::GrantForm
+    @metadata={{@metadata}}
+    @grantChangesets={{this.grantChangesets}} />
+
+  <MetadataForm::PublicationForm
+    @metadata={{@metadata}}
+    @publicationChangesets={{this.publicationChangesets}} />
+{{/if}}

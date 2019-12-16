@@ -79,5 +79,5 @@ export default Factory.extend({
 
       return JSON.stringify(md);
     }
-  })
+  }),
 });

@@ -11,4 +11,9 @@ export default function() {
 
   this.get('/submission-actions/:id');
 
+  this.resource('metadata');
+  this.resource('authors');
+  this.resource('contacts');
+  this.resource('grants');
+  this.resource('publications');
 }
