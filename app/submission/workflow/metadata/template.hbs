@@ -7,3 +7,19 @@
   this metadata, possibly modifying the data if necessary, or sending it back to the user for them to
   change if an error is found.
 </p>
+
+<MetadataForm
+  @next={{this.next}}
+  @metadata={{this.metadata}} as |form|>
+
+  <form.detail />
+  <form.contact />
+  <form.author />
+  <form.grant />
+  <form.publication />
+
+  <WorkflowFooter
+    @cancel={{this.cancel}}
+    @back={{this.back}}
+    @next={{form.validateAndExecuteChanges}} />
+</MetadataForm>

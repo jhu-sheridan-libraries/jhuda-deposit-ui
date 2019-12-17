@@ -7,6 +7,12 @@ import subActions from './routes/submission-actions';
 export default function() {
   this.urlPrefix = ENV.host;
 
+  this.resource('metadata');
+  this.resource('authors');
+  this.resource('contacts');
+  this.resource('grants');
+  this.resource('publications');
+
   ES(this);
   files(this);
   submissions(this);

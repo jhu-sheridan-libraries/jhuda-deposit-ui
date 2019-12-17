@@ -16,6 +16,8 @@ export default Model.extend({
   filesStatus: DS.attr('string'), // processing, pendingReview, requiresAction, approved
   metadata: DS.attr('string'),
 
+  metadataModel: DS.belongsTo('metadata'),
+
   requiredActions: DS.hasMany('submission-action'),
 
   /**

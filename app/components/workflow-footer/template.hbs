@@ -1,0 +1,12 @@
+{{!-- Workflow footer - Next/Back buttons, etc --}}
+<div class="row w-100">
+  <div class="ml-auto mt-4">
+    <div class="btn-group mr-2" role="group" aria-label="Cancel workflow">
+      <button type="button" class="btn btn-outline-danger" {{on "click" @cancel}}>Cancel</button>
+    </div>
+    <div class="btn-group" role="group" aria-label="Workflow navigation">
+      <button type="button" class="btn btn-outline-primary" {{on "click" @back}}>Back</button>
+      <button type="button" class="btn btn-primary next" {{on "click" @next}}>Next</button>
+    </div>
+  </div>
+</div>
