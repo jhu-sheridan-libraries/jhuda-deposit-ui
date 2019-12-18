@@ -25,6 +25,7 @@ export default class SubmissionActionCell extends Component {
 
   @action
   toggleDelete() {
+    // TODO: wrap in try/catch or handle errors by some other means
     this.showDeleteModal = !this.showDeleteModal;
   }
 
