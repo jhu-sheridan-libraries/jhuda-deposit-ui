@@ -23,7 +23,7 @@ module('Integration | Component | submission-action-cell', function(hooks) {
   });
 
   test('Make sure "delete" deletes and transitions', async function (assert) {
-    assert.expect(2);
+    assert.expect(3);
 
     this.owner.register('service:router', Service.extend({
       transitionTo: () => { assert.ok(true); }
@@ -37,5 +37,8 @@ module('Integration | Component | submission-action-cell', function(hooks) {
     await render(hbs`<SubmissionActionCell @record={{record}} />`);
 
     await click('[data-test-delete-btn]');
+
+    assert.dom('[data-test-delete-confirm-btn]').exists();
+    await click('[data-test-delete-confirm-btn]');
   });
 });
