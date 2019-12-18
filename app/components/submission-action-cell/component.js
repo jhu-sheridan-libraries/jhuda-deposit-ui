@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
@@ -9,6 +10,8 @@ export default class SubmissionActionCell extends Component {
   @alias('args.record') submission;
   @alias('args.record.status') status;
 
+  @tracked showDeleteModal = false;
+
   get editable() {
     return this.status === 'draft' || this.status === 'requiresAction';
   }
@@ -18,6 +21,12 @@ export default class SubmissionActionCell extends Component {
    */
   get removable() {
     return this.editable;
+  }
+
+  @action
+  toggleDelete() {
+    // TODO: wrap in try/catch or handle errors by some other means
+    this.showDeleteModal = !this.showDeleteModal;
   }
 
   @action
