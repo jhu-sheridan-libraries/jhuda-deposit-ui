@@ -1,9 +1,13 @@
-import Controller from '@ember/controller';
+import Controller, {
+  inject as controller
+} from '@ember/controller';
 import { action, computed, get } from '@ember/object';
 import { alias } from '@ember/object/computed';
 
 export default class WorkflowFilesController extends Controller {
   @alias('model.submission') submission;
+
+  @controller('submission.workflow') parentController;
 
   @computed('submission.files.[]')
   get files() {
@@ -30,5 +34,20 @@ export default class WorkflowFilesController extends Controller {
   @action
   addFiles(/* files */) {
 
+  }
+
+  @action
+  cancel() {
+    this.parentController.send('cancel');
+  }
+
+  @action
+  back() {
+    this.parentController.send('back');
+  }
+
+  @action
+  next() {
+    this.parentController.send('next');
   }
 }

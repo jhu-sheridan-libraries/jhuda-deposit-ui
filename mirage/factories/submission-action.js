@@ -9,17 +9,17 @@ export default Factory.extend({
     key: 'file1',
     type: 'file',
     status: 'changeRequested',
-    details: faker.lorem.sentence
+    details: faker.lorem.sentence()
   }),
 
   isModified: trait({
     key: 'one',
     status: 'modified',
-    details: faker.lorem.sentence
+    details: faker.lorem.sentence()
   }),
   metadataChangeRequested: trait({
     key: 'one',
     status: 'changeRequested',
-    details: faker.lorem.sentence
+    details: faker.lorem.sentence()
   })
 });
