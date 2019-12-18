@@ -18,23 +18,23 @@ module('Integration | Component | metadata-form', function(hooks) {
   setupMirage(hooks);
   setupAnimationTest(hooks);
 
-  let author,
-      contact,
-      grant,
-      metadata,
-      publication;
+  hooks.beforeEach(async function() {
+    const store = this.owner.lookup('service:store');
 
-  hooks.beforeEach(function() {
-    author = this.server.create('author');
-    contact = this.server.create('contact');
-    grant = this.server.create('grant');
-    publication = this.server.create('publication');
-    metadata = this.server.create('metadata', {
+    const author = store.createRecord('author');
+    const contact = store.createRecord('contact');
+    const grant = store.createRecord('grant');
+    const publication = store.createRecord('publication');
+    const metadata = store.createRecord('metadata', {
       authors: [author],
       contacts: [contact],
       grants: [grant],
-      publications: [publication],
+      publications: [publication]
     });
+
+    this.set('metadata', metadata);
+
+    await settled();
   });
 
   hooks.afterEach(function() {
@@ -48,10 +48,6 @@ module('Integration | Component | metadata-form', function(hooks) {
   });
 
   test('it renders the metadata form', async function(assert) {
-    let storeMetadata = await this.owner.lookup('service:store').findRecord('metadata', metadata.id);
-
-    this.set('metadata', storeMetadata);
-
     await render(hbs`<MetadataForm @metadata={{this.metadata}} />`);
 
     assert.dom('[data-test-detail-form]').isVisible();
@@ -62,10 +58,6 @@ module('Integration | Component | metadata-form', function(hooks) {
   });
 
   test('it validates the metadata form', async function(assert) {
-    let storeMetadata = await this.owner.lookup('service:store').findRecord('metadata', metadata.id);
-
-    this.set('metadata', storeMetadata);
-
     await render(hbs`<MetadataForm @metadata={{this.metadata}} />`);
 
     let forms = findAll('form');
@@ -96,10 +88,6 @@ module('Integration | Component | metadata-form', function(hooks) {
   });
 
   test('it can add and delete authors', async function(assert) {
-    let storeMetadata = await this.owner.lookup('service:store').findRecord('metadata', metadata.id);
-
-    this.set('metadata', storeMetadata);
-
     await render(hbs`<MetadataForm @metadata={{this.metadata}} />`);
 
     await waitFor('[data-test-add-author-button]');
@@ -124,10 +112,6 @@ module('Integration | Component | metadata-form', function(hooks) {
   });
 
   test('it can add and delete contacts', async function(assert) {
-    let storeMetadata = await this.owner.lookup('service:store').findRecord('metadata', metadata.id);
-
-    this.set('metadata', storeMetadata);
-
     await render(hbs`<MetadataForm @metadata={{this.metadata}} />`);
 
     await waitFor('[data-test-add-contact-button]');
@@ -152,10 +136,6 @@ module('Integration | Component | metadata-form', function(hooks) {
   });
 
   test('it can add and delete grants', async function(assert) {
-    let storeMetadata = await this.owner.lookup('service:store').findRecord('metadata', metadata.id);
-
-    this.set('metadata', storeMetadata);
-
     await render(hbs`<MetadataForm @metadata={{this.metadata}} />`);
 
     await waitFor('[data-test-add-grant-button]');
@@ -180,10 +160,6 @@ module('Integration | Component | metadata-form', function(hooks) {
   });
 
   test('it can add and delete publications', async function(assert) {
-    let storeMetadata = await this.owner.lookup('service:store').findRecord('metadata', metadata.id);
-
-    this.set('metadata', storeMetadata);
-
     await render(hbs`<MetadataForm @metadata={{this.metadata}} />`);
 
     await waitFor('[data-test-add-publication-button]');
