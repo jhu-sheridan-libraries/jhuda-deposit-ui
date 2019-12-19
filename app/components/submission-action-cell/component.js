@@ -13,7 +13,7 @@ export default class SubmissionActionCell extends Component {
   @tracked showDeleteModal = false;
 
   get editable() {
-    return this.status === 'draft';
+    return this.status === 'draft' || this.status === 'requiresAction';
   }
 
   /**
