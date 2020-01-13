@@ -4,5 +4,5 @@ const { Model } = DS;
 export default Model.extend({
   name: DS.attr('string'),
   affiliation: DS.attr('string'),
-  metadata: DS.belongsTo('metadata')
+  metadata: DS.belongsTo('metadata'),
 });

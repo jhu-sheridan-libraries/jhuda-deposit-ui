@@ -1,6 +1,6 @@
-import files from '../fixtures/files';
-import subActions from '../fixtures/submission-actions';
-import submissions from '../fixtures/submissions';
+import files from '../custom-fixtures/files';
+import subActions from '../custom-fixtures/submission-actions';
+import submissions from '../custom-fixtures/submissions';
 
 export default function(server) {
   // server.loadFixtures();

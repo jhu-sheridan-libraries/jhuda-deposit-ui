@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { A } from '@ember/array';
+import faker from 'faker';
 
 export default Route.extend({
   async model() {
@@ -9,12 +10,12 @@ export default Route.extend({
 
     if (metadata) return metadata;
 
-    let authors = A([await this.store.createRecord('author')]);
-    let grants = A([await this.store.createRecord('grant')]);
-    let publications = A([await this.store.createRecord('publication')]);
-    let contacts = A([await this.store.createRecord('contact')]);
+    let authors = A([this.store.createRecord('author', { id: faker.random.uuid() })]);
+    let grants = A([this.store.createRecord('grant', { id: faker.random.uuid() })]);
+    let publications = A([this.store.createRecord('publication', { id: faker.random.uuid() })]);
+    let contacts = A([this.store.createRecord('contact', { id: faker.random.uuid() })]);
 
-    metadata = await this.store.createRecord('metadata', {
+    metadata = this.store.createRecord('metadata', {
       authors,
       grants,
       publications,

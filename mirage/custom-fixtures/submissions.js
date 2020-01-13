@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 export default [
   {
     '@id': 'https://archive.local/fcrepo/rest/submissions/43/b7/ba/ba/43b7baab-2f6d-4fc4-97d5-0eca8ac01127',
@@ -70,7 +72,7 @@ export default [
     status: 'complete',
     metadataStatus: 'approved',
     filesStatus: 'approved',
-    metadata: '{"title": "Submission completed by someone else", "keywords": "", "contactName": "Bessie Holstein", "contactEmail": "besstein@cow.edu"}',
+    metadata: `{"collectionTitle": "Submission completed by someone else", "description": "A nice description", "softwareUse": "Please use the software in this way", "dataUse": "Please do not use the data in that way", "keywords": "", "authors": [{"id": "${faker.random.uuid()}", "name": "moo", "affiliation": "JHU"}], "contacts": [{"id": "${faker.random.uuid()}", "name": "Bessie Holstein", "email": "besstein@cow.edu"}], "publications": [{"id": "${faker.random.uuid()}", "doi": "12321213.12AGC", "title": "A title"}], "grants": [{"id": "${faker.random.uuid()}", "awardNumber": "2342321", "projectName": "A nice project", "fundingAgency": "An Agency"}]}`,
     files: [
       'https://archive.local/fcrepo/rest/files/67/d0/5b/e9/67d05be9-3f01-4bb3-81cd-6fcb66aca5ea'
     ],
