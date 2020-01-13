@@ -5,8 +5,6 @@ export default Model.extend({
   collectionTitle: DS.attr('string'),
   description: DS.attr('string'),
   keywords: DS.attr('string'),
-  contactName: DS.attr('string'),
-  contactEmail: DS.attr('string'),
   dataUse: DS.attr('string'),
   softwareUse: DS.attr('string'),
 
