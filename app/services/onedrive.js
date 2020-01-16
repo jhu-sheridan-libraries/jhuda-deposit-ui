@@ -59,6 +59,11 @@ export default class OnedriveService extends Service {
   /**
    * Process the response from OneDrive file selection before resolving the initial Promise.
    *
+   * We must inspect the response from the OneDrive file selection to derive a set of files.
+   * Since we allow the user to select multiple items, including folders, in their OneDrive,
+   * we may follow directories recursively to get all files contained within the selection.
+   * This effectively flattens the file hierarchy in OneDrive.
+   *
    * See the Microsoft documentation for more details on handling OneDrive reponses:
    * https://docs.microsoft.com/en-us/onedrive/developer/controls/file-pickers/js-v72/open-file?view=odsp-graph-online#4-handling-the-picker-response-object
    *
@@ -82,14 +87,28 @@ export default class OnedriveService extends Service {
    * @param {function} resolve this will finish the overall Promise and return to initial caller
    */
   async _process(response, followDirs, resolve) {
-    // const result = [];
+    const result = [];
 
-    // const files = response.value.filter(obj => 'file' in obj);
+    const files = response.value.filter(obj => 'file' in obj);
+    result.push(...files);
 
-    // const accessToken = response.accessToken;
-    // const apiEndpoint = response.apiEndpoint;
+    if (!followDirs) {
+      resolve(result);
+      return;
+    }
 
+    // If the 'followDirs' flag is TRUE, continue to get folder contents
+    const opts = {
+      accessToken: response.accessToken,
+      apiEndpoint: response.apiEndpoint
+    };
 
+    for (let folder of response.value.filter(obj => 'folder' in obj)) {
+      const children = await this._getFilesInFolder(folder, opts, followDirs);
+      result.push(...children);
+    }
+
+    resolve(result);
   }
 
   /**
