@@ -82,12 +82,12 @@ export default class OnedriveService extends Service {
    * @param {function} resolve this will finish the overall Promise and return to initial caller
    */
   async _process(response, followDirs, resolve) {
-    const result = [];
+    // const result = [];
 
-    const files = response.value.filter(obj => 'file' in obj);
+    // const files = response.value.filter(obj => 'file' in obj);
 
-    const accessToken = response.accessToken;
-    const apiEndpoint = response.apiEndpoint;
+    // const accessToken = response.accessToken;
+    // const apiEndpoint = response.apiEndpoint;
 
 
   }
@@ -118,8 +118,13 @@ export default class OnedriveService extends Service {
 
     const json = await odResp.json();
 
+    const newOpts = {
+      apiEndpoint: json.apiEndpoint,
+      accessToken: json.accessToken
+    };
+
     // First compile all Files in this folder
-    const files = json.children.filter(item => 'file' in item);
+    const files = json.value.filter(item => 'file' in item);
     result.push(...files);
 
     if (!followDirs) {
@@ -128,9 +133,10 @@ export default class OnedriveService extends Service {
 
     // Then resolve all sub-folders as list of files
     // Each sub-folder should resolve as an array of child items
-    const subFolders = json.children.filter(item => 'folder' in item)
-      .map(async (folder) => this._getFilesInFolder(folder));
-    subFolders.forEach(folder => result.push(...folder));
+    for (let folder of json.value.filter(item => 'folder' in item)) {
+      const children = await this._getFilesInFolder(folder, newOpts, followDirs);
+      result.push(...children);
+    }
 
     return result;
   }
