@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+import { all } from 'ember-concurrency';
 import { task, dropTask } from 'ember-concurrency-decorators';
 
 export default class OnedriveService extends Service {
@@ -107,11 +108,13 @@ export default class OnedriveService extends Service {
       apiEndpoint: response.apiEndpoint
     };
 
+    const fetches = [];
     for (let folder of response.value.filter(obj => 'folder' in obj)) {
-      // const children = await this._getFilesInFolder(folder, opts, followDirs);
-      const children = yield this._getFilesInFolder.perform(folder, opts, followDirs);
-      result.push(...children);
+      fetches.push(this._getFilesInFolder.perform(folder, opts, followDirs));
     }
+
+    const children = yield all(fetches);
+    result.push(...children.flat());
 
     resolve(result);
   }
@@ -158,10 +161,14 @@ export default class OnedriveService extends Service {
 
     // Then resolve all sub-folders as list of files
     // Each sub-folder should resolve as an array of child items
+    const fetches = [];
     for (let folder of json.value.filter(item => 'folder' in item)) {
-      const children = yield this._getFilesInFolder.perform(folder, newOpts, followDirs);
-      result.push(...children);
+      fetches.push(this._getFilesInFolder.perform(folder, newOpts, followDirs));
     }
+
+    // This should be an array of arrays. Wait until all child requests finish
+    let results = yield all(fetches);
+    result.push(...results.flat());
 
     return result;
   }
