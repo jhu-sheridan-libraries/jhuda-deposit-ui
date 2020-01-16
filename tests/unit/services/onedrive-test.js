@@ -65,7 +65,7 @@ module('Unit | Service | onedrive', function(hooks) {
   test('_getFilesInFolder recurses through child folders', async function (assert) {
     const service = this.owner.lookup('service:onedrive');
     const start = top_children[1];
-    const result = await service._getFilesInFolder(start, get(this, 'startOpts'), true);
+    const result = await service._getFilesInFolder.perform(start, get(this, 'startOpts'), true);
 
     assert.ok(Array.isArray(result), 'Result needs to be an array');
     assert.equal(result.length, 4, 'Unexpected number of elements found in result');
@@ -74,7 +74,7 @@ module('Unit | Service | onedrive', function(hooks) {
   test('_getFilesInFolder ignores folders if told not to follow', async function (assert) {
     const service = this.owner.lookup('service:onedrive');
     const start = top_children[1];
-    const result = await service._getFilesInFolder(start, get(this, 'startOpts'), false);
+    const result = await service._getFilesInFolder.perform(start, get(this, 'startOpts'), false);
 
     assert.ok(Array.isArray(result));
     assert.equal(result.length, 2);
@@ -89,6 +89,6 @@ module('Unit | Service | onedrive', function(hooks) {
       assert.equal(files.length, 8);
     };
 
-    await service._process(start, true, resolve);
+    await service._process.perform(start, true, resolve);
   });
 });

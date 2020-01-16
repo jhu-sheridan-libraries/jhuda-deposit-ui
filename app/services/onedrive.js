@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+import { task, dropTask } from 'ember-concurrency-decorators';
 
 export default class OnedriveService extends Service {
   /**
@@ -32,7 +33,9 @@ export default class OnedriveService extends Service {
    * @param {boolean} followDirs follow directories to get a list of all child items
    * @returns {array} a Promise that resolves to a list of OneDrive DriveItems
    */
-  launchFilePicker(options, appId, followDirs) {
+  @dropTask
+  // eslint-disable-next-line require-yield
+  launchFilePicker = function* (options, appId, followDirs) {
     if (!appId) {
       throw new Error('no-app-id');
     }
@@ -40,7 +43,7 @@ export default class OnedriveService extends Service {
     return new Promise(function (resolve, reject) {
       let odOptions = {
         clientId: appId,
-        success: (response) => this._process(response, followDirs, resolve),
+        success: (response) => this._process(response, followDirs, resolve).perform(),
         cancel: reject(),
         error: reject
       };
@@ -86,7 +89,8 @@ export default class OnedriveService extends Service {
    * @param {boolean} followDirs should we follow directories to get child items?
    * @param {function} resolve this will finish the overall Promise and return to initial caller
    */
-  async _process(response, followDirs, resolve) {
+  @task
+  _process = function* (response, followDirs, resolve) {
     const result = [];
 
     const files = response.value.filter(obj => 'file' in obj);
@@ -104,7 +108,8 @@ export default class OnedriveService extends Service {
     };
 
     for (let folder of response.value.filter(obj => 'folder' in obj)) {
-      const children = await this._getFilesInFolder(folder, opts, followDirs);
+      // const children = await this._getFilesInFolder(folder, opts, followDirs);
+      const children = yield this._getFilesInFolder.perform(folder, opts, followDirs);
       result.push(...children);
     }
 
@@ -125,17 +130,18 @@ export default class OnedriveService extends Service {
    *  }
    * @param {boolean} followDirs should you follow sub-folders?
    */
-  async _getFilesInFolder(driveItem, opts, followDirs) {
+  @task
+  _getFilesInFolder = function* (driveItem, opts, followDirs) {
     let result = [];
 
     const url = `${opts.apiEndpoint}me/drive/items/${driveItem.id}/children`;
 
-    const odResp = await fetch(url, {
+    const odResp = yield fetch(url, {
       headers: { Authorization: `Bearer ${opts.accessToken}` },
       accept: 'application/json;odata.metadata=none'
     });
 
-    const json = await odResp.json();
+    const json = yield odResp.json();
 
     const newOpts = {
       apiEndpoint: json.apiEndpoint,
@@ -153,7 +159,7 @@ export default class OnedriveService extends Service {
     // Then resolve all sub-folders as list of files
     // Each sub-folder should resolve as an array of child items
     for (let folder of json.value.filter(item => 'folder' in item)) {
-      const children = await this._getFilesInFolder(folder, newOpts, followDirs);
+      const children = yield this._getFilesInFolder.perform(folder, newOpts, followDirs);
       result.push(...children);
     }
 
